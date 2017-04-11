@@ -11,18 +11,19 @@ var Engine = (function (global) {
 
         document.body.appendChild(canvas);
 
-        global.ctx = ctx; // TODO: seems to be not the best way
+        GameModel.getInstance().ctx = ctx; 
     }
 
 
-    Engine.prototype.init = function (gameElements) {
-        this.elements = gameElements;
+    Engine.prototype.init = function () {
         this.enterFrame();
     };
 
     Engine.prototype.enterFrame = function () {
-        for (var i = 0; i < this.elements.length; i++) {
-            this.elements[i].render();
+        var elements = GameModel.getInstance().elements;
+        
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].render();
         }
         window.requestAnimationFrame(this.enterFrame.bind(this)); //todo :binding
     };

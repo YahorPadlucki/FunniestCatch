@@ -5,15 +5,17 @@ var Boat = (function () {
         this.width = 200;
         this.heigth = 150;
 
+        this.ctx = GameModel.getInstance().ctx;
+
     }
 
     Boat.prototype.render = function () {
         this.positionX++;
-        ctx.beginPath();
-        ctx.rect(this.positionX, this.positionY, this.width, this.heigth);
-        ctx.fillStyle = "0x000000";
-        ctx.fill();
-        ctx.closePath();
+        this.ctx.beginPath();
+        this.ctx.rect(this.positionX, this.positionY, this.width, this.heigth);
+        this.ctx.fillStyle = "0x000000";
+        this.ctx.fill();
+        this.ctx.closePath();
     };
 
     return Boat

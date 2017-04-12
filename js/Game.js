@@ -1,11 +1,10 @@
 (function () {
-    var elements = [];
+    var engine = new Engine();
+    engine.init();
 
     var boat = new Boat();
-    elements.push(boat);
+    GameModel.getInstance().elements.push(boat);
 
-    var engine = new Engine();
-    engine.init(elements);
 
 
 }());

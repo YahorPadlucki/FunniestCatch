@@ -4,7 +4,8 @@ var GameModel = (function () {
     function init() {
         return {
             elements: [],
-            ctx:""
+            ctx:"",
+            doc:""
         };
 
     };

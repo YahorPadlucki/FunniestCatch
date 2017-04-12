@@ -11,7 +11,8 @@ var Engine = (function (global) {
 
         document.body.appendChild(canvas);
 
-        GameModel.getInstance().ctx = ctx; 
+        GameModel.getInstance().ctx = ctx;
+        GameModel.getInstance().doc = document;
     }
 
 

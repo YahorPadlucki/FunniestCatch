@@ -6,8 +6,11 @@ var Engine = (function (global) {
     var ctx = canvas.getContext('2d');
 
     function Engine() {
-        ctx.width = 800;
-        ctx.height = 600;
+        this.elementsToDraw = [];
+        this.elementsToUpdate = [];
+
+        canvas.width = 600;
+        canvas.height = 600;
 
         document.body.appendChild(canvas);
 
@@ -17,16 +20,34 @@ var Engine = (function (global) {
 
 
     Engine.prototype.init = function () {
+        this.prevTime = Date.now();
         this.enterFrame();
     };
 
     Engine.prototype.enterFrame = function () {
-        var elements = GameModel.getInstance().elements;
-        
-        for (var i = 0; i < elements.length; i++) {
-            elements[i].render();
-        }
+
+        var now = Date.now();
+        var deltaTime = (now - this.prevTime) / 1000.0;
+
+        this.draw();
+        this.update(deltaTime);
+
+        this.prevTime = now;
+
         window.requestAnimationFrame(this.enterFrame.bind(this)); //todo :binding
+    };
+
+    Engine.prototype.draw = function () {
+        GameModel.getInstance().ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+        for (var i = 0; i < this.elementsToDraw.length; i++) {
+            this.elementsToDraw[i].draw();
+        }
+    };
+
+    Engine.prototype.update = function (deltaTime) {
+        for (var i = 0; i < this.elementsToUpdate.length; i++) {
+            this.elementsToUpdate[i].update(deltaTime);
+        }
     };
 
     return Engine;

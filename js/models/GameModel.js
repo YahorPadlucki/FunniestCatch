@@ -3,7 +3,6 @@ var GameModel = (function () {
 
     function init() {
         return {
-            elements: [],
             ctx:"",
             doc:""
         };

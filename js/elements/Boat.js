@@ -16,21 +16,31 @@ var Boat = (function () {
                 this.mousePosition = mouseX;
             }
         }
+
+        this.net = new Net(this.positionX,this.positionY);
     }
 
-    Boat.prototype.draw = function () {
+    Boat.prototype.draw = function (cameraX,cameraY) {
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
-        ctx.rect(this.positionX-this.width/2, this.positionY-this.heigth, this.width, this.heigth);
+        ctx.rect(this.positionX-this.width/2, this.positionY-this.heigth-cameraY, this.width, this.heigth);
         ctx.fillStyle = "#000000";
         ctx.fill();
         ctx.closePath();
+
+
+
+        this.net.draw(cameraX,cameraY);
     };
 
 
     Boat.prototype.update = function (deltaTime){
          this.positionX = this.positionX + (this.mousePosition-this.positionX)*(this.boatSpeed*deltaTime);
+        this.net.positionX = this.positionX;
+        // if(this.net.positionY<GameModel.getInstance().ctx.canvas.height/2)
+
+        this.net.positionY +=0.3;
     };
 
     return Boat

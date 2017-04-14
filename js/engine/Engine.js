@@ -6,16 +6,20 @@ var Engine = (function (global) {
     var ctx = canvas.getContext('2d');
 
     function Engine() {
-        this.elementsToDraw = [];
-        this.elementsToUpdate = [];
-
         canvas.width = 600;
         canvas.height = 600;
 
-        document.body.appendChild(canvas);
-
         GameModel.getInstance().ctx = ctx;
         GameModel.getInstance().doc = document;
+
+        this.elementsToDraw = [];
+        this.elementsToUpdate = [];
+
+        this.camera = new Camera();
+        this.elementsToUpdate.push(this.camera);
+
+        document.body.appendChild(canvas);
+
     }
 
 
@@ -40,7 +44,7 @@ var Engine = (function (global) {
     Engine.prototype.draw = function () {
         GameModel.getInstance().ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         for (var i = 0; i < this.elementsToDraw.length; i++) {
-            this.elementsToDraw[i].draw();
+            this.elementsToDraw[i].draw(this.camera.positionX,this.camera.positionY);
         }
     };
 

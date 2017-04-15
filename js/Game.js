@@ -27,6 +27,10 @@
     var boat = new Boat(boatPositionX,seaPositionY);
     engine.elementsToDraw.push(boat);
     engine.elementsToUpdate.push(boat);
+    
+    var fish = new Fish(50,seaPositionY+100);
+    engine.elementsToDraw.push(fish);
+    engine.elementsToUpdate.push(fish);
 
     engine.camera.setObjectToFollow(boat.net); //TODO: set offset
 

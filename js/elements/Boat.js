@@ -38,7 +38,6 @@ var Boat = (function () {
     Boat.prototype.update = function (deltaTime){
          this.positionX = this.positionX + (this.mousePosition-this.positionX)*(this.boatSpeed*deltaTime);
         this.net.positionX = this.positionX;
-        // if(this.net.positionY<GameModel.getInstance().ctx.canvas.height/2)
 
         this.net.positionY +=0.3;
     };

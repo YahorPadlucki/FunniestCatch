@@ -6,12 +6,16 @@ var Boat = (function () {
         this.width = 100;
         this.heigth = 50;
         this.boatSpeed = 0.8;
+        this.isMouseDown=false;
 
         GameModel.getInstance().doc.addEventListener("mousemove",onMouseMove.bind(this),false);
+        GameModel.getInstance().doc.addEventListener("mousedown",()=>{this.isMouseDown = true},false);
+        GameModel.getInstance().doc.addEventListener("mouseup",()=>{this.isMouseDown = false},false);
 
         function onMouseMove(e) {
-            var mouseX = e.clientX ;
             var canvas = GameModel.getInstance().ctx.canvas;
+            var mouseX = e.clientX - canvas.offsetLeft ;
+
             if(mouseX > 0 && mouseX < canvas.width) {
                 this.mousePosition = mouseX;
             }
@@ -29,17 +33,18 @@ var Boat = (function () {
         ctx.fill();
         ctx.closePath();
 
-
-
         this.net.draw(cameraX,cameraY);
     };
 
 
     Boat.prototype.update = function (deltaTime){
-         this.positionX = this.positionX + (this.mousePosition-this.positionX)*(this.boatSpeed*deltaTime);
-        this.net.positionX = this.positionX;
+        this.positionX += (this.mousePosition-this.positionX)*(this.boatSpeed*deltaTime);
 
-        this.net.positionY +=0.3;
+        //todo: use ease when in water
+        this.net.positionX += (this.positionX-this.net.positionX)*(this.boatSpeed*deltaTime);
+
+        if(this.isMouseDown)
+        this.net.positionY +=0.5;
     };
 
     return Boat

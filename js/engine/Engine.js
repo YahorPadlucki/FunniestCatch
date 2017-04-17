@@ -22,7 +22,6 @@ var Engine = (function (global) {
 
     }
 
-
     Engine.prototype.init = function () {
         this.prevTime = Date.now();
         this.enterFrame();
@@ -38,7 +37,7 @@ var Engine = (function (global) {
 
         this.prevTime = now;
 
-        window.requestAnimationFrame(this.enterFrame.bind(this)); //todo :binding
+        window.requestAnimationFrame(this.enterFrame.bind(this));
     };
 
     Engine.prototype.draw = function () {

@@ -6,8 +6,8 @@ var Fish = (function () {
         this.width = 40;
         this.height = 20;
 
-        this.modeDirection =1;
-        this.speed = 1;
+        this.modeDirection = 1;
+        this.speed = Utils.randomRangeInt(45,80);
     }
 
     Fish.prototype.draw = function (cameraX, cameraY) {
@@ -19,13 +19,13 @@ var Fish = (function () {
         ctx.fill();
     };
 
-    Fish.prototype.update = function (deltaTime) { //todo use delta time
+    Fish.prototype.update = function (deltaTime) {
 
         var canvasWidth = GameModel.getInstance().ctx.canvas.width;
-        this.positionX += this.speed * this.modeDirection;
+        this.positionX += this.speed * deltaTime * this.modeDirection;
 
-        if(this.positionX<0||this.positionX>canvasWidth)
-            this.modeDirection*=-1;
+        if (this.positionX < 0 || this.positionX > canvasWidth - this.width)
+            this.modeDirection *= -1;
 
     };
     return Fish;

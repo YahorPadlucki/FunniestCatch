@@ -7,7 +7,6 @@ var Net = (function () {
 
         this.width = 30;
         this.heigth = 30;
-
     }
 
     Net.prototype.draw = function (cameraX,cameraY) {

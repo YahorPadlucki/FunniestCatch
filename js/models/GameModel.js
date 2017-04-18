@@ -4,7 +4,9 @@ var GameModel = (function () {
     function init() {
         return {
             ctx:"",
-            doc:""
+            doc:"",
+            seaPositionY:150,
+            engine:""
         };
 
     };

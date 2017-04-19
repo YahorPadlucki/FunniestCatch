@@ -19,7 +19,7 @@ var Game = (function () {
         engine.elementsToUpdate.push(boat);
 
         var fishesManager = new FishesManager();
-        fishesManager.createFish();
+        fishesManager.createFishes();
 
         engine.camera.setObjectToFollow(boat.net);
 

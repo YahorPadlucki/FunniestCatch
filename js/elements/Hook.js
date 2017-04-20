@@ -1,16 +1,16 @@
-var Net = (function () {
+var Hook = (function () {
 
-    function Net(positionX, positionY) {
+    function Hook(positionX, positionY) {
 
         this.topPositionY = positionY;
         this.positionX = positionX;
         this.positionY = positionY;
 
-        this.width = 30;
-        this.heigth = 30;
+        this.width = 10;
+        this.heigth = 20;
 
-        this.netSpeedX = 5;
-        this.netSpeedY = 50;
+        this.hookSpeedX = 5;
+        this.hookSpeedY = 50;
 
         GameModel.getInstance().doc.addEventListener("mousedown", ()=> {
             this.isMouseDown = true
@@ -20,7 +20,7 @@ var Net = (function () {
         }, false);
     }
 
-    Net.prototype.draw = function (cameraX, cameraY) {
+    Hook.prototype.draw = function (cameraX, cameraY) {
 
         var ctx = GameModel.getInstance().ctx;
 
@@ -31,26 +31,26 @@ var Net = (function () {
         ctx.closePath();
 
     };
-    Net.prototype.update = function (deltaTime, boatPositionX) {
-        var isNetInSea = (this.positionY - this.heigth / 2) > GameModel.getInstance().seaPositionY;
+    Hook.prototype.update = function (deltaTime, boatPositionX) {
+        var isHookInSea = (this.positionY - this.heigth / 2) > GameModel.getInstance().seaPositionY;
 
-        if (isNetInSea) {
-            this.positionX += (boatPositionX - this.positionX) * (this.netSpeedX * deltaTime);
+        if (isHookInSea) {
+            this.positionX += (boatPositionX - this.positionX) * (this.hookSpeedX * deltaTime);
         }
         else {
             this.positionX = boatPositionX;
         }
 
         if (this.isMouseDown) {
-            this.positionY += this.netSpeedY * deltaTime;
+            this.positionY += this.hookSpeedY * deltaTime;
         } else {
             if (this.positionY > this.topPositionY) {
-                this.positionY -= this.netSpeedY * deltaTime;
+                this.positionY -= this.hookSpeedY * deltaTime;
             }
             else {
                 this.positionY = this.topPositionY;
             }
         }
     };
-    return Net;
+    return Hook;
 }());

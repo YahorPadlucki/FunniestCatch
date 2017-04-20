@@ -10,7 +10,7 @@ var Boat = (function () {
 
         GameModel.getInstance().doc.addEventListener("mousemove", this.onMouseMove.bind(this), false);
 
-        this.net = new Net(this.positionX, this.positionY);
+        this.hook = new Hook(this.positionX, this.positionY);
     }
 
     Boat.prototype.onMouseMove = function (e) {
@@ -31,14 +31,14 @@ var Boat = (function () {
         ctx.fill();
         ctx.closePath();
 
-        this.net.draw(cameraX, cameraY);
+        this.hook.draw(cameraX, cameraY);
     };
 
 
     Boat.prototype.update = function (deltaTime) {
         this.positionX += (this.mousePosition - this.positionX) * (this.boatSpeed * deltaTime);
 
-       this.net.update(deltaTime,this.positionX);
+       this.hook.update(deltaTime,this.positionX);
 
     };
 

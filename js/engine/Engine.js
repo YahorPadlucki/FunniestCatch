@@ -27,6 +27,19 @@ var Engine = (function (global) {
         this.enterFrame();
     };
 
+    Engine.prototype.removeFromUpdate = function (element){
+        removeFromArray(this.elementsToDraw,element);
+        removeFromArray(this.elementsToUpdate,element);
+
+    };
+
+    function removeFromArray(arr, element) {
+        var index = arr.indexOf(element);
+        if (index != -1) {
+            arr.splice(index, 1);
+        }
+    };
+
     Engine.prototype.enterFrame = function () {
 
         var now = Date.now();

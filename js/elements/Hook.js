@@ -12,12 +12,15 @@ var Hook = (function () {
         this.hookSpeedX = 5;
         this.hookSpeedY = 50;
 
+        this.fishes = [];
+
         GameModel.getInstance().doc.addEventListener("mousedown", ()=> {
             this.isMouseDown = true
         }, false);
         GameModel.getInstance().doc.addEventListener("mouseup", ()=> {
             this.isMouseDown = false
         }, false);
+
     }
 
     Hook.prototype.draw = function (cameraX, cameraY) {
@@ -30,7 +33,29 @@ var Hook = (function () {
         ctx.fill();
         ctx.closePath();
 
+        this.drawFishes(ctx, cameraY);
+
     };
+
+    Hook.prototype.addFish = function () {
+        this.fishes.push({
+            width: 20,
+            height: 40,
+            color: "#346503"
+        })
+    };
+
+    Hook.prototype.drawFishes = function (ctx, cameraY) {
+        if (!this.fishes.length)return;
+        var fish = this.fishes[this.fishes.length - 1];
+
+        ctx.beginPath();
+        ctx.rect((this.positionX - fish.width / 2), this.positionY - cameraY, fish.width, fish.height);
+        ctx.fillStyle = fish.color;
+        ctx.fill();
+        ctx.closePath();
+    };
+
     Hook.prototype.update = function (deltaTime, boatPositionX) {
         var isHookInSea = (this.positionY - this.heigth / 2) > GameModel.getInstance().seaPositionY;
 

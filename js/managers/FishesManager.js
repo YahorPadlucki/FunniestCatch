@@ -24,12 +24,12 @@ var FishesManager = (function () {
     FishesManager.prototype.createFishes = function () {
 
         var canvasWidth = GameModel.getInstance().ctx.canvas.width;
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 2; i++) {
 
             var rndX = Utils.randomRange(0, canvasWidth);
             var randomVerticalGap = Utils.randomRange(50, 150) * (i + 1);
 
-            var fish = new Fish(rndX, GameModel.getInstance().seaPositionY + randomVerticalGap);
+            var fish = new SineMoveFish(rndX, GameModel.getInstance().seaPositionY + randomVerticalGap);
             this.engine.elementsToDraw.push(fish);
             this.engine.elementsToUpdate.push(fish);
             this.fishes.push(fish);

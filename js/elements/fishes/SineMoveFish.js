@@ -14,12 +14,12 @@ var SineMoveFish = (function () {
     SineMoveFish.prototype.draw = function (cameraX, cameraY) {
         var ctx = GameModel.getInstance().ctx;
         ctx.save();
-        ctx.translate(this.positionX + this.width / 2, this.positionY + this.height / 2);
+        ctx.translate(this.positionX + this.width / 2, this.positionY + this.height / 2- cameraY);
         ctx.rotate(this.angel);
         ctx.beginPath();
-        ctx.rect(- this.width / 2, -this.height/2 - cameraY, this.width, this.height);
+        ctx.rect(- this.width / 2, -this.height/2, this.width, this.height);
         ctx.rotate(-this.angel);
-        ctx.translate((this.positionX + this.width / 2) * (-1), (this.positionY + this.height/2) * (-1));
+        ctx.translate((this.positionX + this.width / 2) * (-1), (this.positionY + this.height/2- cameraY) * (-1));
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();

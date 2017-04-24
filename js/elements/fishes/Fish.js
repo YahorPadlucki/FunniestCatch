@@ -1,4 +1,7 @@
 var Fish = (function () {
+
+    var colors = ["#A52A2A","#FF7F50","#00008B","#006400","#FF1493","#C71585","#FF4500"];
+
     function Fish(positionX, positionY) {
         this.positionX = positionX;
         this.positionY = positionY;
@@ -11,7 +14,7 @@ var Fish = (function () {
         this.modeDirection = 1;
         this.speed = Utils.randomRangeInt(45, 80);
 
-        this.color = Utils.getRandomColor();
+        this.color = colors[Math.floor(Math.random()*colors.length)];
     }
 
     Fish.prototype.draw = function (cameraX, cameraY) {

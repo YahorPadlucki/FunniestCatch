@@ -13,9 +13,9 @@ var FishesManager = (function () {
             var fish = this.fishes[i];
             if (hook.positionY > fish.positionY - fish.height / 2 && hook.positionY < fish.positionY + fish.height / 2) {
                 if (hook.positionX > fish.positionX - fish.width / 2 && hook.positionX < fish.positionX + fish.width / 2) {
+                    hook.addFish(fish);
                     this.engine.removeFromUpdate(fish);
                     this.fishes.splice(i, 1);
-                    hook.addFish();
                 }
             }
         }

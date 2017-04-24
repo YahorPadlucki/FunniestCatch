@@ -37,12 +37,8 @@ var Hook = (function () {
 
     };
 
-    Hook.prototype.addFish = function () {
-        this.fishes.push({
-            width: 20,
-            height: 40,
-            color: "#346503"
-        })
+    Hook.prototype.addFish = function (fish) {
+        this.fishes.push(fish)
     };
 
     Hook.prototype.drawFishes = function (ctx, cameraY) {
@@ -50,7 +46,7 @@ var Hook = (function () {
         var fish = this.fishes[this.fishes.length - 1];
 
         ctx.beginPath();
-        ctx.rect((this.positionX - fish.width / 2), this.positionY - cameraY, fish.width, fish.height);
+        ctx.rect((this.positionX - fish.height/ 2), this.positionY - cameraY, fish.height, fish.width);
         ctx.fillStyle = fish.color;
         ctx.fill();
         ctx.closePath();

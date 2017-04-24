@@ -21,7 +21,7 @@ var SineMoveFish = (function () {
         ctx.rotate(-this.angel);
         ctx.translate((this.positionX + this.width / 2) * (-1), (this.positionY + this.height/2) * (-1));
         ctx.closePath();
-        ctx.fillStyle = "#346503";
+        ctx.fillStyle = this.color;
         ctx.fill();
         ctx.restore();
     };

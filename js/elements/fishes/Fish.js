@@ -10,6 +10,8 @@ var Fish = (function () {
 
         this.modeDirection = 1;
         this.speed = Utils.randomRangeInt(45, 80);
+
+        this.color = Utils.getRandomColor();
     }
 
     Fish.prototype.draw = function (cameraX, cameraY) {
@@ -17,7 +19,7 @@ var Fish = (function () {
         ctx.beginPath();
         ctx.rect(this.positionX - this.width / 2, this.positionY-this.height/2 - cameraY, this.width, this.height);
         ctx.closePath();
-        ctx.fillStyle = "#346503";
+        ctx.fillStyle = this.color;
         ctx.fill();
     };
 

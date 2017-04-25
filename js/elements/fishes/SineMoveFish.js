@@ -26,8 +26,12 @@ var SineMoveFish = (function () {
         ctx.restore();
     };
 
+
+    count =0;
     SineMoveFish.prototype.update = function (deltaTime) {
 
+        if(count>3 )return
+        count++;
         this.positionX += this.speed * deltaTime * this.modeDirection;
         if (this.positionX < 0 || this.positionX >= this.canvasWidth){
 

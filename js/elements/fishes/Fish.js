@@ -11,6 +11,8 @@ var Fish = (function () {
         this.width = 40;
         this.height = 20;
 
+        this.angel =0;
+
         this.modeDirection = 1;
         this.speed = Utils.randomRangeInt(45, 80);
 

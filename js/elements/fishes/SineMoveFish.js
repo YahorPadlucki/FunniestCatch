@@ -8,30 +8,32 @@ var SineMoveFish = (function () {
         this.prevX = this.positionX;
         this.prevY = this.positionY;
 
-        this.angel =0;
+        this.angle =0;
     }
+    SineMoveFish.prototype=Object.create(Fish.prototype);
+
+
 
     SineMoveFish.prototype.draw = function (cameraX, cameraY) {
         var ctx = GameModel.getInstance().ctx;
         ctx.save();
         ctx.translate(this.positionX + this.width / 2, this.positionY + this.height / 2- cameraY);
-        ctx.rotate(this.angel);
+        ctx.rotate(this.angle);
         ctx.beginPath();
-        ctx.rect(- this.width / 2, -this.height/2, this.width, this.height);
-        ctx.rotate(-this.angel);
+        ctx.rect(-this.width / 2, -this.height/2, this.width, this.height);
+        ctx.rotate(-this.angle);
         ctx.translate((this.positionX + this.width / 2) * (-1), (this.positionY + this.height/2- cameraY) * (-1));
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
         ctx.restore();
+
+        this.drawVertecies(cameraY);
     };
 
 
-    count =0;
     SineMoveFish.prototype.update = function (deltaTime) {
 
-        if(count>3 )return
-        count++;
         this.positionX += this.speed * deltaTime * this.modeDirection;
         if (this.positionX < 0 || this.positionX >= this.canvasWidth){
 
@@ -43,7 +45,7 @@ var SineMoveFish = (function () {
         var dirX = this.prevX - this.positionX;
         var dirY = this.prevY - this.positionY;
 
-        this.angel =  Math.atan2(dirY, dirX) ;
+        this.angle =  Math.atan2(dirY, dirX) ;
 
         this.prevX = this.positionX;
         this.prevY = this.positionY;

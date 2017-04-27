@@ -1,10 +1,10 @@
 var Hook = (function () {
 
-    function Hook(positionX, positionY) {
+    function Hook(x, y) {
 
-        this.topPositionY = positionY;
-        this.positionX = positionX;
-        this.positionY = positionY;
+        this.topPositionY = y;
+        this.localX = x;
+        this.localY = y;
 
         this.width = 10;
         this.heigth = 20;
@@ -23,17 +23,17 @@ var Hook = (function () {
 
     }
 
-    Hook.prototype.draw = function (cameraX, cameraY) {
+    Hook.prototype.draw = function () {
 
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
-        ctx.rect(this.positionX - this.width / 2, this.positionY - this.heigth - cameraY, this.width, this.heigth);
+        ctx.rect(this.x - this.width / 2, this.y - this.heigth, this.width, this.heigth);
         ctx.fillStyle = "#ff0000";
         ctx.fill();
         ctx.closePath();
 
-        this.drawFishes(ctx, cameraY);
+        this.drawFishes(ctx);
 
     };
 
@@ -41,37 +41,40 @@ var Hook = (function () {
         this.fishes.push(fish)
     };
 
-    Hook.prototype.drawFishes = function (ctx, cameraY) {
+    Hook.prototype.drawFishes = function (ctx) {
         if (!this.fishes.length)return;
         var fish = this.fishes[this.fishes.length - 1];
 
         ctx.beginPath();
-        ctx.rect((this.positionX - fish.height/ 2), this.positionY - cameraY, fish.height, fish.width);
+        ctx.rect((this.x - fish.height/ 2), this.y, fish.height, fish.width);
         ctx.fillStyle = fish.color;
         ctx.fill();
         ctx.closePath();
     };
 
-    Hook.prototype.update = function (deltaTime, boatPositionX) {
-        var isHookInSea = (this.positionY - this.heigth / 2) > GameModel.getInstance().seaPositionY;
+    Hook.prototype.update = function (deltaTime, boatPositionX,cameraY) {
+        var isHookInSea = (this.localY - this.heigth / 2) > GameModel.getInstance().seaPositionY;
 
         if (isHookInSea) {
-            this.positionX += (boatPositionX - this.positionX) * (this.hookSpeedX * deltaTime);
+            this.localX += (boatPositionX - this.localX) * (this.hookSpeedX * deltaTime);
         }
         else {
-            this.positionX = boatPositionX;
+            this.localX = boatPositionX;
         }
 
         if (this.isMouseDown) {
-            this.positionY += this.hookSpeedY * deltaTime;
+            this.localY += this.hookSpeedY * deltaTime;
         } else {
-            if (this.positionY > this.topPositionY) {
-                this.positionY -= this.hookSpeedY * deltaTime;
+            if (this.localY > this.topPositionY) {
+                this.localY -= this.hookSpeedY * deltaTime;
             }
             else {
-                this.positionY = this.topPositionY;
+                this.localY = this.topPositionY;
             }
         }
+
+        this.x = this.localX;
+        this.y = this.localY - cameraY;
     };
     return Hook;
 }());

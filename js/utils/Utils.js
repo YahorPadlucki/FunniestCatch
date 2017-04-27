@@ -31,17 +31,22 @@ var Utils = (function () {
 
     Utils.collideCircleWithRotatedRectangle = function (point, rect) {
 
-        var rectCenterX = rect.positionX;
-        var rectCenterY = rect.positionY;
+        var rectCenterX = rect.localX;
+        var rectCenterY = rect.localY;
 
         var rectX = rectCenterX - rect.width / 2;
         var rectY = rectCenterY - rect.height / 2;
 
         var ctx = GameModel.getInstance().ctx;
+        ctx.fillStyle = "#f056ff"
+        ctx.fillRect(rectCenterX,rectCenterY,5,5);
 
-        var unrotatedCircleX = Math.cos(rect.angle) * ( point.positionX - rectCenterX ) - Math.sin(rect.angle) * ( point.positionY - rectCenterY ) + rectCenterX;
-        var unrotatedCircleY = Math.sin(rect.angle) * ( point.positionX - rectCenterX ) + Math.cos(rect.angle) * ( point.positionY - rectCenterY ) + rectCenterY;
 
+        var unrotatedCircleX = Math.cos(rect.angle) * ( point.localX - rectCenterX ) - Math.sin(rect.angle) * ( point.localY - rectCenterY ) + rectCenterX;
+        var unrotatedCircleY = Math.sin(rect.angle) * ( point.localX - rectCenterX ) + Math.cos(rect.angle) * ( point.localY - rectCenterY ) + rectCenterY;
+
+        ctx.fillStyle = "#ff00ff"
+        ctx.fillRect(unrotatedCircleX,unrotatedCircleY,5,5);
         var closestX, closestY;
 
 
@@ -53,6 +58,7 @@ var Utils = (function () {
             closestX = unrotatedCircleX;
         }
 
+
         if (unrotatedCircleY < rectY) {
             closestY = rectY;
         } else if (unrotatedCircleY > rectY + rect.height) {
@@ -60,6 +66,9 @@ var Utils = (function () {
         } else {
             closestY = unrotatedCircleY;
         }
+
+        ctx.fillStyle = "#ff56ff"
+        ctx.fillRect(closestX,closestY,5,5);
 
 
         var distance = getDistance(unrotatedCircleX, unrotatedCircleY, closestX, closestY);

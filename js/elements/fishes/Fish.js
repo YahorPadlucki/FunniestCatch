@@ -1,70 +1,73 @@
 var Fish = (function () {
 
-    var colors = ["#A52A2A","#FF7F50","#00008B","#006400","#FF1493","#C71585","#FF4500"];
+    var colors = ["#A52A2A", "#FF7F50", "#00008B", "#006400", "#FF1493", "#C71585", "#FF4500"];
 
-    function Fish(positionX, positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
+    function Fish(x, y) {
+        this.localX = x;
+        this.localY = y;
 
         this.canvasWidth = GameModel.getInstance().ctx.canvas.width;
 
         this.width = 40;
         this.height = 20;
 
-        this.angle =0;
+        this.angle = 0;
 
         this.modeDirection = 1;
         this.speed = Utils.randomRangeInt(45, 80);
 
-        this.color = colors[Math.floor(Math.random()*colors.length)];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
     }
 
-    Fish.prototype.draw = function (cameraX, cameraY) {
+    Fish.prototype.draw = function () {
         var ctx = GameModel.getInstance().ctx;
         ctx.beginPath();
-        ctx.rect(this.positionX - this.width / 2, this.positionY-this.height/2 - cameraY, this.width, this.height);
+        ctx.rect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
 
 
-        this.drawVertecies(cameraY);
+        this.drawVertices();
 
     };
 
-    Fish.prototype.drawVertecies = function (cameraY) {
+    Fish.prototype.drawVertices = function () {
         var ctx = GameModel.getInstance().ctx;
 
-        var topLeft = {x:this.positionX - this.width / 2,y: this.positionY-this.height/2 - cameraY};
-        var topRight ={x:this.positionX + this.width / 2,y: this.positionY-this.height/2 - cameraY};
-        var bottomLeft ={x:this.positionX - this.width / 2,y: this.positionY+this.height/2 - cameraY};
-        var bottomRight ={x:this.positionX + this.width / 2,y: this.positionY+this.height/2 - cameraY};
+        var topLeft = {x: this.x - this.width / 2, y: this.y - this.height / 2};
+        var topRight = {x: this.x + this.width / 2, y: this.y - this.height / 2};
+        var bottomLeft = {x: this.x - this.width / 2, y: this.y + this.height / 2};
+        var bottomRight = {x: this.x + this.width / 2, y: this.y + this.height / 2};
 
-        var center = {x:this.positionX- this.width / 2,y:this.positionY-this.height/2};
+        var pivot = {x: this.x, y: this.y};
 
-        topLeft= Utils.rotatePoint(center,topLeft,this.angle);
-        topRight= Utils.rotatePoint(center,topRight,this.angle);
-        bottomLeft= Utils.rotatePoint(center,bottomLeft,this.angle);
-        bottomRight= Utils.rotatePoint(center,bottomRight,this.angle);
+        topLeft = Utils.rotatePoint(pivot, topLeft, this.angle);
+        topRight = Utils.rotatePoint(pivot, topRight, this.angle);
+        bottomLeft = Utils.rotatePoint(pivot, bottomLeft, this.angle);
+        bottomRight = Utils.rotatePoint(pivot, bottomRight, this.angle);
 
         ctx.beginPath();
-        ctx.rect(topLeft[0],  topLeft[1], 5, 5);
-        ctx.rect(topRight[0],  topRight[1], 5, 5);
-        ctx.rect(bottomLeft[0],  bottomLeft[1], 5, 5);
-        ctx.rect(bottomRight[0],  bottomRight[1], 5, 5);
+        ctx.rect(topLeft[0], topLeft[1] , 5, 5);
+        ctx.rect(topRight[0], topRight[1] , 5, 5);
+        ctx.rect(bottomLeft[0], bottomLeft[1] , 5, 5);
+        ctx.rect(bottomRight[0], bottomRight[1], 5, 5);
         ctx.closePath();
         ctx.fillStyle = "#ffffff";
         ctx.fill();
     };
 
-    Fish.prototype.update = function (deltaTime) {
-        this.positionX += this.speed * deltaTime * this.modeDirection;
+    Fish.prototype.update = function (deltaTime, cameraY) {
+        this.localX += this.speed * deltaTime * this.modeDirection;
 
-        if (this.positionX < 0 || this.positionX >= this.canvasWidth){
+        if (this.localX < 0 || this.localX >= this.canvasWidth) {
 
             this.speed = Utils.randomRangeInt(45, 80);
             this.modeDirection *= -1;
         }
+
+        this.x = this.localX;
+        this.y = this.localY - cameraY;
 
 
     };

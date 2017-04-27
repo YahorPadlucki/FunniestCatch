@@ -13,16 +13,17 @@ var Game = (function () {
 
         var sea = new Sea(seaPositionY);
         engine.elementsToDraw.push(sea);
+        engine.elementsToUpdate.push(sea);
 
 
-        this.fishesManager = new FishesManager();
+       this.fishesManager = new FishesManager();
         this.fishesManager.createFishes();
 
         this.boat = new Boat(boatPositionX, seaPositionY);
         engine.elementsToDraw.push(this.boat);
         engine.elementsToUpdate.push(this.boat);
 
-        engine.camera.setObjectToFollow(this.boat.hook);
+     engine.camera.setObjectToFollow(this.boat.hook);
 
         engine.elementsToUpdate.push(this);
 
@@ -30,7 +31,7 @@ var Game = (function () {
     }
 
     Game.prototype.update = function (deltaTime) {
-        this.fishesManager.checkCollisionWithHook(this.boat.hook)
+        // this.fishesManager.checkCollisionWithHook(this.boat.hook)
 
     };
 

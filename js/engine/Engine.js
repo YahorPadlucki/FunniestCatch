@@ -8,7 +8,6 @@ var Engine = (function (global) {
     function Engine() {
         canvas.width = 600;
         canvas.height = 600;
-
         GameModel.getInstance().ctx = ctx;
         GameModel.getInstance().doc = document;
 
@@ -56,13 +55,13 @@ var Engine = (function (global) {
     Engine.prototype.draw = function () {
         GameModel.getInstance().ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
         for (var i = 0; i < this.elementsToDraw.length; i++) {
-            this.elementsToDraw[i].draw(this.camera.positionX,this.camera.positionY);
+            this.elementsToDraw[i].draw();
         }
     };
 
     Engine.prototype.update = function (deltaTime) {
         for (var i = 0; i < this.elementsToUpdate.length; i++) {
-            this.elementsToUpdate[i].update(deltaTime);
+            this.elementsToUpdate[i].update(deltaTime,this.camera.localY);
         }
     };
 

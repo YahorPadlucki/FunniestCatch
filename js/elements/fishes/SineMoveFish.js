@@ -1,12 +1,12 @@
 var SineMoveFish = (function () {
-    function SineMoveFish(positionX, positionY) {
+    function SineMoveFish(x, y) {
 
         Fish.apply(this,arguments);
 
-        this.initPositionY = positionY;
-        this.initPositionX = positionX;
-        this.prevX = this.positionX;
-        this.prevY = this.positionY;
+        this.initPositionY = y;
+        this.initPositionX = x;
+        this.prevX = this.localX=x;
+        this.prevY = this.localY=y;
 
         this.angle =0;
     }
@@ -14,41 +14,43 @@ var SineMoveFish = (function () {
 
 
 
-    SineMoveFish.prototype.draw = function (cameraX, cameraY) {
+    SineMoveFish.prototype.draw = function () {
         var ctx = GameModel.getInstance().ctx;
         ctx.save();
-        ctx.translate(this.positionX + this.width / 2, this.positionY + this.height / 2- cameraY);
+        ctx.translate(this.x , this.y);
         ctx.rotate(this.angle);
         ctx.beginPath();
-        ctx.rect(-this.width / 2, -this.height/2, this.width, this.height);
-        ctx.rotate(-this.angle);
-        ctx.translate((this.positionX + this.width / 2) * (-1), (this.positionY + this.height/2- cameraY) * (-1));
+        ctx.rect(-this.width/2, -this.height/2, this.width, this.height);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
         ctx.restore();
-
-        this.drawVertecies(cameraY);
+        this.drawVertices();
     };
 
+    var count = 0
+    SineMoveFish.prototype.update = function (deltaTime,cameraY) {
 
-    SineMoveFish.prototype.update = function (deltaTime) {
-
-        this.positionX += this.speed * deltaTime * this.modeDirection;
-        if (this.positionX < 0 || this.positionX >= this.canvasWidth){
+        // if(count>3) return;
+            count++
+        this.localX += this.speed * deltaTime * this.modeDirection;
+        if (this.localX < 0 || this.localX >= this.canvasWidth){
 
             this.speed = Utils.randomRangeInt(45, 80);
             this.modeDirection *= -1;
         }
-        this.positionY =  50*Math.sin(this.positionX/20)+this.initPositionY; 
+        this.localY =  50*Math.sin(this.localX/20)+this.initPositionY;
 
-        var dirX = this.prevX - this.positionX;
-        var dirY = this.prevY - this.positionY;
+        this.dirX = this.prevX - this.localX;
+        this.dirY = this.prevY - this.localY;
 
-        this.angle =  Math.atan2(dirY, dirX) ;
+        this.angle =  Math.atan2(this.dirY, this.dirX) ;
 
-        this.prevX = this.positionX;
-        this.prevY = this.positionY;
+        this.prevX = this.localX;
+        this.prevY = this.localY;
+
+        this.x = this.localX;
+        this.y= this.localY-cameraY;
     };
     return SineMoveFish;
 })();

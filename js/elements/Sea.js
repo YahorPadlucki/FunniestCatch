@@ -6,7 +6,7 @@ var Sea = (function () {
         this.height = 0;
     }
 
-    Sea.prototype.draw = function () {
+    Sea.prototype.draw = function draw () {
         this.ctx.beginPath();
         this.ctx.rect(0, this.y,  this.ctx.canvas.width,  this.ctx.canvas.height+this.height);
         this.ctx.closePath();

@@ -7,8 +7,8 @@ var Boat = (function () {
         this.heigth = 50;
         this.boatSpeed = 0.8;
         this.isMouseDown = false;
-        this.x=this.localX ;
-        this.y=this.localY ;
+        this.x = this.localX;
+        this.y = this.localY;
 
         GameModel.getInstance().doc.addEventListener("mousemove", this.onMouseMove.bind(this), false);
 
@@ -24,25 +24,23 @@ var Boat = (function () {
         }
     };
 
-    Boat.prototype.draw = function () {
+    function draw() {
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
-        ctx.rect(this.x-this.width/2, this.y - this.heigth, this.width, this.heigth);
+        ctx.rect(this.x - this.width / 2, this.y - this.heigth, this.width, this.heigth);
         ctx.fillStyle = "#000000";
         ctx.fill();
         ctx.closePath();
-
-        this.hook.draw();
     };
 
 
-    Boat.prototype.update = function (deltaTime,cameraY) {
-        this.localX +=  (this.mousePosition - this.localX) * (this.boatSpeed * deltaTime);
+    Boat.prototype.update = function (deltaTime, cameraY) {
+        this.localX += (this.mousePosition - this.localX) * (this.boatSpeed * deltaTime);
         this.x = this.localX;
         this.y = this.localY - cameraY;
-        this.hook.update(deltaTime,this.x,cameraY);
-
+        this.hook.update(deltaTime, this.x, cameraY);
+        draw();
     };
 
     return Boat

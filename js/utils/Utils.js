@@ -15,8 +15,7 @@ var Utils = (function () {
         var a = point1.x - point2.x;
         var b = point1.y - point2.y;
 
-        var c = Math.sqrt(a * a + b * b);
-        return c;
+        return Math.sqrt(a * a + b * b);
     };
 
     Utils.getRandomColor = function () {
@@ -29,49 +28,41 @@ var Utils = (function () {
     };
 
 
-    Utils.collideCircleWithRotatedRectangle = function (point, rect) {
+    Utils.collidePointWithRotatedRectangle = function (point, rect) {
 
-        var rectCenterX = rect.localX;
-        var rectCenterY = rect.localY;
+        var rectCenterX = rect.x;
+        var rectCenterY = rect.y;
 
         var rectX = rectCenterX - rect.width / 2;
         var rectY = rectCenterY - rect.height / 2;
 
-        var ctx = GameModel.getInstance().ctx;
-        ctx.fillStyle = "#f056ff"
-        ctx.fillRect(rectCenterX,rectCenterY,5,5);
+       /* var ctx = GameModel.getInstance().ctx;
+        ctx.fillStyle="#ffffff";
+        ctx.fillRect(point.x,point.y,5,5)*/
 
 
-        var unrotatedCircleX = Math.cos(rect.angle) * ( point.localX - rectCenterX ) - Math.sin(rect.angle) * ( point.localY - rectCenterY ) + rectCenterX;
-        var unrotatedCircleY = Math.sin(rect.angle) * ( point.localX - rectCenterX ) + Math.cos(rect.angle) * ( point.localY - rectCenterY ) + rectCenterY;
+        var rotatedPoint = Utils.rotatePoint(rect,point,rect.angle);
 
-        ctx.fillStyle = "#ff00ff"
-        ctx.fillRect(unrotatedCircleX,unrotatedCircleY,5,5);
         var closestX, closestY;
 
-
-        if (unrotatedCircleX < rectX) {
+        if (rotatedPoint.x < rectX) {
             closestX = rectX;
-        } else if (unrotatedCircleX > rectX + rect.width) {
+        } else if (rotatedPoint.x > rectX + rect.width) {
             closestX = rectX + rect.width;
         } else {
-            closestX = unrotatedCircleX;
+            closestX = rotatedPoint.x;
         }
 
 
-        if (unrotatedCircleY < rectY) {
+        if (rotatedPoint.y < rectY) {
             closestY = rectY;
-        } else if (unrotatedCircleY > rectY + rect.height) {
+        } else if (rotatedPoint.y > rectY + rect.height) {
             closestY = rectY + rect.height;
         } else {
-            closestY = unrotatedCircleY;
+            closestY = rotatedPoint.y;
         }
 
-        ctx.fillStyle = "#ff56ff"
-        ctx.fillRect(closestX,closestY,5,5);
-
-
-        var distance = getDistance(unrotatedCircleX, unrotatedCircleY, closestX, closestY);
+        var distance = getDistance(rotatedPoint.x, rotatedPoint.y, closestX, closestY);
 
         return distance < 1;
     };
@@ -80,7 +71,7 @@ var Utils = (function () {
         if (r > 255 || g > 255 || b > 255)
             throw "Invalid color component";
         return ((r << 16) | (g << 8) | b).toString(16);
-    }
+    };
 
     function getDistance(fromX, fromY, toX, toY) {
         var dX = Math.abs(fromX - toX);
@@ -96,7 +87,7 @@ var Utils = (function () {
             y = Math.round((Math.sin(angle) * (point.x - pivot.x)) +
                 (Math.cos(angle) * (point.y - pivot.y)) +
                 pivot.y);
-        return [x, y];
+        return {x:x, y:y};
     };
 
     return Utils;

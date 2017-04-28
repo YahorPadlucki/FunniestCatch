@@ -11,7 +11,6 @@ var Engine = (function (global) {
         GameModel.getInstance().ctx = ctx;
         GameModel.getInstance().doc = document;
 
-        this.elementsToDraw = [];
         this.elementsToUpdate = [];
 
         this.camera = new Camera();
@@ -27,7 +26,6 @@ var Engine = (function (global) {
     };
 
     Engine.prototype.removeFromUpdate = function (element){
-        removeFromArray(this.elementsToDraw,element);
         removeFromArray(this.elementsToUpdate,element);
 
     };
@@ -41,22 +39,16 @@ var Engine = (function (global) {
 
     Engine.prototype.enterFrame = function () {
 
+        GameModel.getInstance().ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
         var now = Date.now();
         var deltaTime = (now - this.prevTime) / 1000.0;
 
-        this.draw();
         this.update(deltaTime);
 
         this.prevTime = now;
 
         window.requestAnimationFrame(this.enterFrame.bind(this));
-    };
-
-    Engine.prototype.draw = function () {
-        GameModel.getInstance().ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-        for (var i = 0; i < this.elementsToDraw.length; i++) {
-            this.elementsToDraw[i].draw();
-        }
     };
 
     Engine.prototype.update = function (deltaTime) {

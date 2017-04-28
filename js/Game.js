@@ -12,26 +12,24 @@ var Game = (function () {
         var boatPositionX = context.canvas.width / 2;
 
         var sea = new Sea(seaPositionY);
-        engine.elementsToDraw.push(sea);
         engine.elementsToUpdate.push(sea);
 
 
-       this.fishesManager = new FishesManager();
+        this.fishesManager = new FishesManager();
         this.fishesManager.createFishes();
 
         this.boat = new Boat(boatPositionX, seaPositionY);
-        engine.elementsToDraw.push(this.boat);
         engine.elementsToUpdate.push(this.boat);
 
-     engine.camera.setObjectToFollow(this.boat.hook);
+        engine.camera.setObjectToFollow(this.boat.hook);
 
         engine.elementsToUpdate.push(this);
 
 
     }
 
-    Game.prototype.update = function (deltaTime) {
-        // this.fishesManager.checkCollisionWithHook(this.boat.hook)
+    Game.prototype.update = function () {
+        this.fishesManager.checkCollisionWithHook(this.boat.hook)
 
     };
 

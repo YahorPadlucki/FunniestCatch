@@ -23,7 +23,7 @@ var Hook = (function () {
 
     }
 
-    Hook.prototype.draw = function () {
+   function draw () {
 
         var ctx = GameModel.getInstance().ctx;
 
@@ -75,6 +75,7 @@ var Hook = (function () {
 
         this.x = this.localX;
         this.y = this.localY - cameraY;
+        draw();
     };
     return Hook;
 }());

@@ -11,7 +11,7 @@ var FishesManager = (function () {
         for (var i = this.fishes.length - 1; i >= 0; i--) {
             var fish = this.fishes[i];
 
-            if (Utils.collideCircleWithRotatedRectangle(hook, fish)) {
+            if (Utils.collidePointWithRotatedRectangle(hook, fish)) {
                 hook.addFish(fish);
                 this.engine.removeFromUpdate(fish);
                 this.fishes.splice(i, 1);
@@ -22,13 +22,12 @@ var FishesManager = (function () {
     FishesManager.prototype.createFishes = function () {
 
         var canvasWidth = GameModel.getInstance().ctx.canvas.width;
-        for (var i = 0; i < 1; i++) {
+        for (var i = 0; i < 10; i++) {
 
             var rndX = Utils.randomRange(0, canvasWidth);
-            var randomVerticalGap = Utils.randomRange(150, 150) * (i + 1);
+            var randomVerticalGap = Utils.randomRange(50, 150) * (i + 1);
 
             var fish = new SineMoveFish(rndX, GameModel.getInstance().seaPositionY + randomVerticalGap);
-            this.engine.elementsToDraw.push(fish);
             this.engine.elementsToUpdate.push(fish);
             this.fishes.push(fish);
         }

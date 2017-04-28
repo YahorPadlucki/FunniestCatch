@@ -48,10 +48,10 @@ var Fish = (function () {
         bottomRight = Utils.rotatePoint(pivot, bottomRight, this.angle);
 
         ctx.beginPath();
-        ctx.rect(topLeft[0], topLeft[1] , 5, 5);
-        ctx.rect(topRight[0], topRight[1] , 5, 5);
-        ctx.rect(bottomLeft[0], bottomLeft[1] , 5, 5);
-        ctx.rect(bottomRight[0], bottomRight[1], 5, 5);
+        ctx.rect(topLeft.x, topLeft.y , 5, 5);
+        ctx.rect(topRight.x, topRight.y , 5, 5);
+        ctx.rect(bottomLeft.x, bottomLeft.y , 5, 5);
+        ctx.rect(bottomRight.x, bottomRight.y, 5, 5);
         ctx.closePath();
         ctx.fillStyle = "#ffffff";
         ctx.fill();

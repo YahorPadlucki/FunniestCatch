@@ -48,9 +48,9 @@ var Fish = (function () {
         bottomRight = Utils.rotatePoint(pivot, bottomRight, this.angle);
 
         ctx.beginPath();
-        ctx.rect(topLeft.x, topLeft.y , 5, 5);
-        ctx.rect(topRight.x, topRight.y , 5, 5);
-        ctx.rect(bottomLeft.x, bottomLeft.y , 5, 5);
+        ctx.rect(topLeft.x, topLeft.y, 5, 5);
+        ctx.rect(topRight.x, topRight.y, 5, 5);
+        ctx.rect(bottomLeft.x, bottomLeft.y, 5, 5);
         ctx.rect(bottomRight.x, bottomRight.y, 5, 5);
         ctx.closePath();
         ctx.fillStyle = "#ffffff";
@@ -64,12 +64,23 @@ var Fish = (function () {
 
             this.speed = Utils.randomRangeInt(45, 80);
             this.modeDirection *= -1;
+
+            this.setPositionInBounds();
         }
 
         this.x = this.localX;
         this.y = this.localY - cameraY;
-
+        this.draw();
 
     };
+
+    Fish.prototype.setPositionInBounds = function () {
+        if (this.localX < 0) {
+            this.localX = 0;
+        }
+        if (this.localX > this.canvasWidth) {
+            this.localX = this.canvasWidth;
+        }
+    }
     return Fish;
 })();

@@ -24,7 +24,7 @@ var Boat = (function () {
         }
     };
 
-    function draw() {
+    Boat.prototype.draw = function () {
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
@@ -39,8 +39,8 @@ var Boat = (function () {
         this.localX += (this.mousePosition - this.localX) * (this.boatSpeed * deltaTime);
         this.x = this.localX;
         this.y = this.localY - cameraY;
+        this.draw();
         this.hook.update(deltaTime, this.x, cameraY);
-        draw();
     };
 
     return Boat

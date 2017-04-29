@@ -23,7 +23,7 @@ var Hook = (function () {
 
     }
 
-   function draw () {
+    Hook.prototype.draw =function() {
 
         var ctx = GameModel.getInstance().ctx;
 
@@ -32,16 +32,16 @@ var Hook = (function () {
         ctx.fillStyle = "#ff0000";
         ctx.fill();
         ctx.closePath();
-
-        this.drawFishes(ctx);
-
     };
 
     Hook.prototype.addFish = function (fish) {
         this.fishes.push(fish)
     };
 
-    Hook.prototype.drawFishes = function (ctx) {
+    Hook.prototype.drawFishes = function () {
+
+        var ctx = GameModel.getInstance().ctx;
+
         if (!this.fishes.length)return;
         var fish = this.fishes[this.fishes.length - 1];
 
@@ -75,7 +75,8 @@ var Hook = (function () {
 
         this.x = this.localX;
         this.y = this.localY - cameraY;
-        draw();
+        this.draw();
+        this.drawFishes();
     };
     return Hook;
 }());

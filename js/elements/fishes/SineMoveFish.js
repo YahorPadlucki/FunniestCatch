@@ -32,14 +32,15 @@ var SineMoveFish = (function () {
     SineMoveFish.prototype.update = function (deltaTime, cameraY) {
 
         // if (count < 3) {
-
             count++
-            this.localX += this.speed * deltaTime * this.modeDirection;
             if (this.localX < 0 || this.localX >= this.canvasWidth) {
 
                 this.speed = Utils.randomRangeInt(45, 80);
                 this.modeDirection *= -1;
+                this.setPositionInBounds();
             }
+
+            this.localX += this.speed * deltaTime * this.modeDirection;
             this.localY = 50 * Math.sin(this.localX / 20) + this.initPositionY;
 
             this.dirX = this.prevX - this.localX;
@@ -55,6 +56,8 @@ var SineMoveFish = (function () {
 
         this.x = this.localX;
         this.y = this.localY - cameraY;
+
+        this.draw();
     };
     return SineMoveFish;
 })();

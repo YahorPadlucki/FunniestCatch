@@ -6,7 +6,7 @@ var Sea = (function () {
         this.height = 0;
     }
 
-    Sea.prototype.draw = function draw () {
+    Sea.prototype.draw =function() {
         this.ctx.beginPath();
         this.ctx.rect(0, this.y,  this.ctx.canvas.width,  this.ctx.canvas.height+this.height);
         this.ctx.closePath();
@@ -17,7 +17,8 @@ var Sea = (function () {
 
     Sea.prototype.update = function (deltaTime,cameraY) {
         this.y=this.localY-cameraY;
-        // this.ctx.canvas.height=cameraY;
+        this.height=this.ctx.canvas.height+cameraY;
+        this.draw();
     };
 
     return Sea;

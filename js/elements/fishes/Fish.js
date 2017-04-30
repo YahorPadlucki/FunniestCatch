@@ -10,6 +10,7 @@ var Fish = (function () {
         this.color = colors[Math.floor(Math.random() * colors.length)];
 
         this.moveBehaviour = new AccelerationMove(x, y);
+        this.angle = this.moveBehaviour.angle;
     }
 
     Fish.prototype.draw = function () {
@@ -17,7 +18,7 @@ var Fish = (function () {
 
         ctx.save();
         ctx.translate(this.x, this.y);
-        ctx.rotate(this.moveBehaviour.angle);
+        ctx.rotate(this.angle);
         ctx.beginPath();
         ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height);
         ctx.closePath();
@@ -38,10 +39,10 @@ var Fish = (function () {
 
         var pivot = {x: this.x, y: this.y};
 
-        topLeft = Utils.rotatePoint(pivot, topLeft, this.moveBehaviour.angle);
-        topRight = Utils.rotatePoint(pivot, topRight, this.moveBehaviour.angle);
-        bottomLeft = Utils.rotatePoint(pivot, bottomLeft, this.moveBehaviour.angle);
-        bottomRight = Utils.rotatePoint(pivot, bottomRight, this.moveBehaviour.angle);
+        topLeft = Utils.rotatePoint(pivot, topLeft, this.angle);
+        topRight = Utils.rotatePoint(pivot, topRight, this.angle);
+        bottomLeft = Utils.rotatePoint(pivot, bottomLeft, this.angle);
+        bottomRight = Utils.rotatePoint(pivot, bottomRight, this.angle);
 
         ctx.beginPath();
         ctx.rect(topLeft.x, topLeft.y, 5, 5);
@@ -59,6 +60,7 @@ var Fish = (function () {
 
         this.x = this.moveBehaviour.x;
         this.y = this.moveBehaviour.y - cameraY;
+        this.angle = this.moveBehaviour.angle;
 
         this.draw();
 

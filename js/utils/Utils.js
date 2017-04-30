@@ -38,10 +38,13 @@ var Utils = (function () {
 
        /* var ctx = GameModel.getInstance().ctx;
         ctx.fillStyle="#ffffff";
-        ctx.fillRect(point.x,point.y,5,5)*/
+        ctx.fillRect(point.x,point.y,5,5);*/
 
 
         var rotatedPoint = Utils.rotatePoint(rect,point,rect.angle);
+
+    /*    ctx.fillStyle="#ff23ff";
+        ctx.fillRect(rotatedPoint.x,rotatedPoint.y,5,5);*/
 
         var closestX, closestY;
 
@@ -61,6 +64,8 @@ var Utils = (function () {
         } else {
             closestY = rotatedPoint.y;
         }
+       /* ctx.fillStyle="#ff13f";
+        ctx.fillRect(closestX,closestY,5,5)*/
 
         var distance = getDistance(rotatedPoint.x, rotatedPoint.y, closestX, closestY);
 

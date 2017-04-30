@@ -3,31 +3,27 @@ var Fish = (function () {
     var colors = ["#A52A2A", "#FF7F50", "#00008B", "#006400", "#FF1493", "#C71585", "#FF4500"];
 
     function Fish(x, y) {
-        this.localX = x;
-        this.localY = y;
-
-        this.canvasWidth = GameModel.getInstance().ctx.canvas.width;
 
         this.width = 40;
         this.height = 20;
 
-        this.angle = 0;
-
-        this.modeDirection = 1;
-        this.speed = Utils.randomRangeInt(45, 80);
-
         this.color = colors[Math.floor(Math.random() * colors.length)];
+
+        this.moveBehaviour = new AccelerationMove(x, y);
     }
 
     Fish.prototype.draw = function () {
         var ctx = GameModel.getInstance().ctx;
+
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.moveBehaviour.angle);
         ctx.beginPath();
-        ctx.rect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
+        ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height);
         ctx.closePath();
         ctx.fillStyle = this.color;
         ctx.fill();
-
-
+        ctx.restore();
         this.drawVertices();
 
     };
@@ -42,10 +38,10 @@ var Fish = (function () {
 
         var pivot = {x: this.x, y: this.y};
 
-        topLeft = Utils.rotatePoint(pivot, topLeft, this.angle);
-        topRight = Utils.rotatePoint(pivot, topRight, this.angle);
-        bottomLeft = Utils.rotatePoint(pivot, bottomLeft, this.angle);
-        bottomRight = Utils.rotatePoint(pivot, bottomRight, this.angle);
+        topLeft = Utils.rotatePoint(pivot, topLeft, this.moveBehaviour.angle);
+        topRight = Utils.rotatePoint(pivot, topRight, this.moveBehaviour.angle);
+        bottomLeft = Utils.rotatePoint(pivot, bottomLeft, this.moveBehaviour.angle);
+        bottomRight = Utils.rotatePoint(pivot, bottomRight, this.moveBehaviour.angle);
 
         ctx.beginPath();
         ctx.rect(topLeft.x, topLeft.y, 5, 5);
@@ -58,29 +54,14 @@ var Fish = (function () {
     };
 
     Fish.prototype.update = function (deltaTime, cameraY) {
-        this.localX += this.speed * deltaTime * this.modeDirection;
 
-        if (this.localX < 0 || this.localX >= this.canvasWidth) {
+        this.moveBehaviour.move(deltaTime);
 
-            this.speed = Utils.randomRangeInt(45, 80);
-            this.modeDirection *= -1;
+        this.x = this.moveBehaviour.x;
+        this.y = this.moveBehaviour.y - cameraY;
 
-            this.setPositionInBounds();
-        }
-
-        this.x = this.localX;
-        this.y = this.localY - cameraY;
         this.draw();
 
     };
-
-    Fish.prototype.setPositionInBounds = function () {
-        if (this.localX < 0) {
-            this.localX = 0;
-        }
-        if (this.localX > this.canvasWidth) {
-            this.localX = this.canvasWidth;
-        }
-    }
     return Fish;
 })();

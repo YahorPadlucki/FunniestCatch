@@ -27,7 +27,7 @@ var FishesManager = (function () {
             var rndX = Utils.randomRange(0, canvasWidth);
             var randomVerticalGap = Utils.randomRange(50, 150) * (i + 1);
 
-            var fish = new AccMoveFish(rndX, GameModel.getInstance().seaPositionY + randomVerticalGap);
+            var fish = new Fish(rndX, GameModel.getInstance().seaPositionY + randomVerticalGap);
             this.engine.elementsToUpdate.push(fish);
             this.fishes.push(fish);
         }

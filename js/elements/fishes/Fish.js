@@ -9,7 +9,7 @@ var Fish = (function () {
 
         this.color = colors[Math.floor(Math.random() * colors.length)];
 
-        this.moveBehaviour = new AccelerationMove(x, y);
+        this.moveBehaviour = new EasingBehaviour(x, y);
         this.angle = this.moveBehaviour.angle;
     }
 

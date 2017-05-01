@@ -75,6 +75,8 @@ var Hook = (function () {
 
         this.x = this.localX;
         this.y = this.localY - cameraY;
+
+        GameModel.getInstance().deep = (this.y+cameraY- GameModel.getInstance().seaPositionY).toFixed();
         this.draw();
         this.drawFishes();
     };

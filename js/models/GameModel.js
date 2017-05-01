@@ -6,7 +6,8 @@ var GameModel = (function () {
             ctx:"",
             doc:"",
             seaPositionY:150,
-            engine:""
+            engine:"",
+            deep:""
         };
 
     };

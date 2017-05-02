@@ -95,6 +95,26 @@ var Utils = (function () {
         return {x:x, y:y};
     };
 
+    //https://github.com/danro/jquery-easing/blob/master/jquery.easing.js
+    Utils.easeOutCubic = function(currentIteration, startValue, changeInValue, totalIterations) {
+        return changeInValue * (Math.pow(currentIteration / totalIterations - 1, 3) + 1) + startValue;
+        // return c*(t/=d)*t + b;
+        // return changeInValue*(currentIteration/=totalIterations)*currentIteration + startValue;
+    };
+
+    Utils.easeInSine = function(currentIteration, startValue, changeInValue, totalIterations) {
+        return -changeInValue * Math.cos(currentIteration / totalIterations * (Math.PI / 2)) + changeInValue + startValue;
+    };
+
+    Utils.easeInQuad = function(currentIteration, startValue, changeInValue, totalIterations) {
+        return changeInValue * (currentIteration /= totalIterations) * currentIteration + startValue;
+    };
+
+    Utils.easeInQuad = function(currentIteration, startValue, changeInValue, totalIterations) {
+        if ((currentIteration /= totalIterations / 2) < 1) return changeInValue / 2 * currentIteration * currentIteration * currentIteration + startValue;
+        return changeInValue / 2 * ((currentIteration -= 2) * currentIteration * currentIteration + 2) + startValue;
+    };
+
     return Utils;
 
 })();

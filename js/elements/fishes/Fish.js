@@ -4,8 +4,10 @@ var Fish = (function () {
 
     function Fish(x, y) {
 
-        this.width = 40;
+        this.width = 20;
         this.height = 20;
+        this.headWidth = this.height/2;
+        this.teilLength = 10;
 
         this.color = colors[Math.floor(Math.random() * colors.length)];
 
@@ -16,7 +18,7 @@ var Fish = (function () {
     Fish.prototype.draw = function () {
         var ctx = GameModel.getInstance().ctx;
 
-        ctx.save();
+    /*    ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
         ctx.beginPath();
@@ -25,7 +27,33 @@ var Fish = (function () {
         ctx.fillStyle = this.color;
         ctx.fill();
         ctx.restore();
-        this.drawVertices();
+        this.drawVertices();*/
+
+    ctx.save();
+        ctx.fillStyle = this.color
+        ctx.beginPath();
+
+        ctx.arc(this.x+this.height/2,this.y+this.height/2,this.height/2,1.57,-1.57,false);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.fillRect(this.x+this.headWidth,this.y,this.width,this.height);
+        ctx.beginPath();
+        ctx.moveTo(this.x+this.headWidth+this.width,this.y);
+        ctx.lineTo(this.x+this.headWidth+this.width+this.teilLength,this.y+this.height/2);
+        ctx.lineTo(this.x+this.headWidth+this.width,this.y+this.height);
+        ctx.moveTo(this.x+this.headWidth+this.width,this.y);
+        ctx.lineTo(this.x+this.headWidth+this.width,this.y+this.height);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(this.x+this.headWidth+this.width+this.teilLength,this.y+this.height/2);
+        ctx.lineTo(this.headWidth+this.width+this.teilLength*2,this.y);
+        ctx.moveTo(this.x+this.headWidth+this.width+this.teilLength,this.y+this.height/2);
+        ctx.lineTo(this.x+this.headWidth+this.width+this.teilLength*2,this.y+this.height);
+        ctx.lineTo(this.x+this.headWidth+this.width+this.teilLength*2,this.y);
+        // ctx.restore()
+        ctx.fill();
+
+        this.drawVertices()
 
     };
 

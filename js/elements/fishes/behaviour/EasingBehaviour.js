@@ -8,6 +8,8 @@ EasingBehaviour = (function () {
 
         this.goalX = this.canvasWidth - this.initX;
         this.totalIterations = 300 * this.goalX / this.canvasWidth + 1;
+
+
     }
 
     EasingBehaviour.prototype.move = function (deltaTime) {

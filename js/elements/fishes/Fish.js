@@ -4,54 +4,45 @@ var Fish = (function () {
 
     function Fish(x, y) {
 
-        this.width = 20;
-        this.height = 20;
-        this.headWidth = this.height/2;
-        this.teilLength = 10;
+        this.bodyWidth = 20;
+        this.bodyHeight = 20;
+        this.headWidth = this.bodyHeight / 2;
+        this.tailWidth = 10;
+
+        this.width = this.headWidth + this.bodyWidth + this.tailWidth;
+        this.height = this.bodyHeight;
 
         this.color = colors[Math.floor(Math.random() * colors.length)];
 
-        this.moveBehaviour = new EasingBehaviour(x, y);
+        this.moveBehaviour = new SineMove(x, y);
         this.angle = this.moveBehaviour.angle;
     }
 
     Fish.prototype.draw = function () {
         var ctx = GameModel.getInstance().ctx;
 
-    /*    ctx.save();
+        ctx.save();
         ctx.translate(this.x, this.y);
         ctx.rotate(this.angle);
         ctx.beginPath();
-        ctx.rect(-this.width / 2, -this.height / 2, this.width, this.height);
-        ctx.closePath();
         ctx.fillStyle = this.color;
+//draw head
+        var headX = -this.width / 2 + this.headWidth;
+        ctx.arc(headX, 0, this.headWidth, 1.57, -1.57, false);
         ctx.fill();
+//draw body
+        ctx.beginPath();
+        ctx.fillRect(headX, -this.bodyHeight / 2, this.bodyWidth, this.bodyHeight);
+//drawTail
+        ctx.beginPath();
+        var tailX = headX + this.bodyWidth;
+        ctx.moveTo(tailX, -this.bodyHeight / 2);
+        ctx.lineTo(tailX + this.tailWidth, this.bodyHeight / 2);
+        ctx.lineTo(tailX + this.tailWidth, -this.bodyHeight / 2);
+        ctx.lineTo(tailX, this.bodyHeight / 2);
+        ctx.fill();
+
         ctx.restore();
-        this.drawVertices();*/
-
-    ctx.save();
-        ctx.fillStyle = this.color
-        ctx.beginPath();
-
-        ctx.arc(this.x+this.height/2,this.y+this.height/2,this.height/2,1.57,-1.57,false);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.fillRect(this.x+this.headWidth,this.y,this.width,this.height);
-        ctx.beginPath();
-        ctx.moveTo(this.x+this.headWidth+this.width,this.y);
-        ctx.lineTo(this.x+this.headWidth+this.width+this.teilLength,this.y+this.height/2);
-        ctx.lineTo(this.x+this.headWidth+this.width,this.y+this.height);
-        ctx.moveTo(this.x+this.headWidth+this.width,this.y);
-        ctx.lineTo(this.x+this.headWidth+this.width,this.y+this.height);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.moveTo(this.x+this.headWidth+this.width+this.teilLength,this.y+this.height/2);
-        ctx.lineTo(this.headWidth+this.width+this.teilLength*2,this.y);
-        ctx.moveTo(this.x+this.headWidth+this.width+this.teilLength,this.y+this.height/2);
-        ctx.lineTo(this.x+this.headWidth+this.width+this.teilLength*2,this.y+this.height);
-        ctx.lineTo(this.x+this.headWidth+this.width+this.teilLength*2,this.y);
-        // ctx.restore()
-        ctx.fill();
 
         this.drawVertices()
 

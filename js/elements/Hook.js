@@ -35,6 +35,7 @@ var Hook = (function () {
     };
 
     Hook.prototype.addFish = function (fish) {
+        fish.angle = 1.5708;
         this.fishes.push(fish)
     };
 
@@ -44,12 +45,15 @@ var Hook = (function () {
 
         if (!this.fishes.length)return;
         var fish = this.fishes[this.fishes.length - 1];
+        fish.x=this.x ;
+        fish.y=this.y;
+        DrawUtils.drawFish(fish);
 
-        ctx.beginPath();
+     /*   ctx.beginPath();
         ctx.rect((this.x - fish.height/ 2), this.y, fish.height, fish.width);
         ctx.fillStyle = fish.color;
         ctx.fill();
-        ctx.closePath();
+        ctx.closePath();*/
     };
 
     Hook.prototype.update = function (deltaTime, boatPositionX,cameraY) {

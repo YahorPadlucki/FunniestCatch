@@ -19,32 +19,9 @@ var Fish = (function () {
     }
 
     Fish.prototype.draw = function () {
-        var ctx = GameModel.getInstance().ctx;
 
-        ctx.save();
-        ctx.translate(this.x, this.y);
-        ctx.rotate(this.angle);
-        ctx.beginPath();
-        ctx.fillStyle = this.color;
-//draw head
-        var headX = -this.width / 2 + this.headWidth;
-        ctx.arc(headX, 0, this.headWidth, 1.57, -1.57, false);
-        ctx.fill();
-//draw body
-        ctx.beginPath();
-        ctx.fillRect(headX, -this.bodyHeight / 2, this.bodyWidth, this.bodyHeight);
-//drawTail
-        ctx.beginPath();
-        var tailX = headX + this.bodyWidth;
-        ctx.moveTo(tailX, -this.bodyHeight / 2);
-        ctx.lineTo(tailX + this.tailWidth, this.bodyHeight / 2);
-        ctx.lineTo(tailX + this.tailWidth, -this.bodyHeight / 2);
-        ctx.lineTo(tailX, this.bodyHeight / 2);
-        ctx.fill();
-
-        ctx.restore();
-
-        this.drawVertices()
+        DrawUtils.drawFish(this);
+        this.drawVertices();
 
     };
 

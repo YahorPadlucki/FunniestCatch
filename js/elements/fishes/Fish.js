@@ -14,7 +14,7 @@ var Fish = (function () {
 
         this.color = colors[Math.floor(Math.random() * colors.length)];
 
-        this.moveBehaviour = new SineMove(x, y);
+        this.moveBehaviour = new DefaultMove(x, y);
         this.angle = this.moveBehaviour.angle;
     }
 
@@ -57,6 +57,7 @@ var Fish = (function () {
         this.x = this.moveBehaviour.x;
         this.y = this.moveBehaviour.y - cameraY;
         this.angle = this.moveBehaviour.angle;
+        this.moveDirection = this.moveBehaviour.moveDirection;
 
         this.draw();
 

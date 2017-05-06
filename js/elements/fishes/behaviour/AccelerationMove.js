@@ -13,13 +13,13 @@ AccelerationMove = (function () {
         if (this.x < 0 || this.x > this.canvasWidth) {
 
             this.speed = Utils.randomRangeInt(45, 80);
-            this.modeDirection *= -1;
+            this.moveDirection *= -1;
             this.acc = this.initAcc;
 
             this.setPositionInBounds();
         }
         this.acc += 0.01;
-        this.x += this.speed * deltaTime * this.modeDirection * this.acc;
+        this.x += this.speed * deltaTime * this.moveDirection * this.acc;
 
        
     };

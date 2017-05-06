@@ -3,22 +3,27 @@ DefaultMove = (function () {
     function DefaultMove(x, y) {
         this.x = x;
         this.y = y;
-        
+
         this.canvasWidth = GameModel.getInstance().ctx.canvas.width;
-        this.modeDirection = 1;
+        this.moveDirection = -1;
         this.speed = Utils.randomRangeInt(45, 80);
         this.angle = 0;
 
     }
 
     DefaultMove.prototype.move = function (deltaTime) {
-        this.x += this.speed * deltaTime * this.modeDirection;
+        this.x += this.speed * deltaTime * this.moveDirection;
 
         if (this.x < 0 || this.x >= this.canvasWidth) {
 
             this.speed = Utils.randomRangeInt(45, 80);
-            this.modeDirection *= -1;
-
+            this.moveDirection *= -1;
+            if (this.moveDirection > 0) {
+                this.angle = 180 * Math.PI / 180;
+            }
+            else {
+                this.angle = 0;
+            }
             this.setPositionInBounds();
         }
 

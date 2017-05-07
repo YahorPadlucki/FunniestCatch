@@ -37,6 +37,10 @@ var Hook = (function () {
     Hook.prototype.addFish = function (fish) {
         fish.angle = 1.5708;
         this.fishes.push(fish)
+
+        var event = document.createEvent('Event');
+        event.initEvent(GameEvent.FISH_CAUGHT, true, true);
+        document.dispatchEvent(event);
     };
 
     Hook.prototype.drawFishes = function () {

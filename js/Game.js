@@ -27,6 +27,9 @@ var Game = (function () {
 
         this.deepMeter = new DeepMeter();
         engine.elementsToUpdate.push(this.deepMeter);
+        
+        this.scoreBoard = new ScoreBoard();
+        engine.elementsToUpdate.push(this.scoreBoard);
 
 
     }

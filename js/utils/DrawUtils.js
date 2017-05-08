@@ -10,7 +10,6 @@ var DrawUtils = (function () {
         ctx.save();
         ctx.translate(fish.x, fish.y);
         ctx.rotate(fish.angle);
-        // ctx.scale(-fish.moveDirection, 1);
 
         ctx.beginPath();
         ctx.fillStyle = fish.color;

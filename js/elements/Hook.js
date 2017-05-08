@@ -45,19 +45,12 @@ var Hook = (function () {
 
     Hook.prototype.drawFishes = function () {
 
-        var ctx = GameModel.getInstance().ctx;
-
         if (!this.fishes.length)return;
         var fish = this.fishes[this.fishes.length - 1];
         fish.x=this.x ;
         fish.y=this.y;
         DrawUtils.drawFish(fish);
 
-     /*   ctx.beginPath();
-        ctx.rect((this.x - fish.height/ 2), this.y, fish.height, fish.width);
-        ctx.fillStyle = fish.color;
-        ctx.fill();
-        ctx.closePath();*/
     };
 
     Hook.prototype.update = function (deltaTime, boatPositionX,cameraY) {
@@ -78,6 +71,7 @@ var Hook = (function () {
             }
             else {
                 this.localY = this.topPositionY;
+                this.fishes=[];
             }
         }
 

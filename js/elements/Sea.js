@@ -4,20 +4,21 @@ var Sea = (function () {
         this.localY = positionY;
         this.ctx = GameModel.getInstance().ctx;
         this.height = 0;
+        this.y = this.localY;
     }
 
-    Sea.prototype.draw =function() {
+    Sea.prototype.draw = function () {
         this.ctx.beginPath();
-        this.ctx.rect(0, this.y,  this.ctx.canvas.width,  this.ctx.canvas.height+this.height);
+        this.ctx.rect(0, this.y, this.ctx.canvas.width, this.ctx.canvas.height + this.height);
         this.ctx.closePath();
 
         this.ctx.fillStyle = "#51DCFF";
         this.ctx.fill();
     };
 
-    Sea.prototype.update = function (deltaTime,cameraY) {
-        this.y=this.localY-cameraY;
-        this.height=this.ctx.canvas.height+cameraY;
+    Sea.prototype.update = function (deltaTime, cameraY) {
+        this.y = this.localY - cameraY;
+        this.height = this.ctx.canvas.height + cameraY;
         this.draw();
     };
 

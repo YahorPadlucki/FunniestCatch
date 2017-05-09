@@ -14,8 +14,6 @@ var Engine = (function (global) {
         this.elementsToUpdate = [];
 
         this.camera = new Camera();
-        this.elementsToUpdate.push(this.camera);
-
         document.body.appendChild(canvas);
 
     }
@@ -51,10 +49,22 @@ var Engine = (function (global) {
         window.requestAnimationFrame(this.enterFrame.bind(this));
     };
 
+    //TODO: object to draw (fishes ,boat etc);
+    //TODO: object to update (collision, camera)
     Engine.prototype.update = function (deltaTime) {
         for (var i = 0; i < this.elementsToUpdate.length; i++) {
-            this.elementsToUpdate[i].update(deltaTime,this.camera.localY);
+            //
+            var element = this.elementsToUpdate[i];
+            if(element.y>=this.camera.y){ //y vs localY
+                element.update(deltaTime,this.camera.localY);
+            }
+
         }
+
+        this.camera.update(deltaTime);
+        GameModel.getInstance().ctx.beginPath();
+        GameModel.getInstance().ctx.fillRect(0,this.camera.y,5,5);
+
     };
 
     return Engine;

@@ -14,7 +14,10 @@ var Fish = (function () {
 
         this.color = colors[Math.floor(Math.random() * colors.length)];
 
+        this.y = y;
+
         this.moveBehaviour = new DefaultMove(x, y);
+        
         this.angle = this.moveBehaviour.angle;
     }
 

@@ -34,7 +34,7 @@ var Game = (function () {
 
     }
 
-    Game.prototype.update = function () {
+    Game.prototype.update = function () { //TODO: to update
         this.fishesManager.checkCollisionWithHook(this.boat.hook)
 
     };

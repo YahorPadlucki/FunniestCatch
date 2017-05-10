@@ -19,7 +19,6 @@ var Sea = (function () {
     Sea.prototype.update = function (deltaTime, cameraY) {
         this.y = this.localY - cameraY;
         this.height = this.ctx.canvas.height + cameraY;
-        this.draw();
     };
 
     return Sea;

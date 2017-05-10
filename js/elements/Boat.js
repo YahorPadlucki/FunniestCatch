@@ -4,7 +4,7 @@ var Boat = (function () {
         this.localY = y;
         this.mousePosition = y;
         this.width = 100;
-        this.heigth = 50;
+        this.height = 50;
         this.boatSpeed = 0.8;
         this.isMouseDown = false;
         this.x = this.localX;
@@ -28,10 +28,11 @@ var Boat = (function () {
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
-        ctx.rect(this.x - this.width / 2, this.y - this.heigth, this.width, this.heigth);
+        ctx.rect(this.x - this.width / 2, this.y - this.height, this.width, this.height);
         ctx.fillStyle = "#000000";
         ctx.fill();
         ctx.closePath();
+
     };
 
 
@@ -39,8 +40,9 @@ var Boat = (function () {
         this.localX += (this.mousePosition - this.localX) * (this.boatSpeed * deltaTime);
         this.x = this.localX;
         this.y = this.localY - cameraY;
-        this.draw();
         this.hook.update(deltaTime, this.x, cameraY);
+        this.hook.draw();
+
     };
 
     return Boat

@@ -7,7 +7,7 @@ var Hook = (function () {
         this.localY = y;
 
         this.width = 10;
-        this.heigth = 20;
+        this.height = 20;
 
         this.hookSpeedX = 5;
         this.hookSpeedY = 50;
@@ -28,10 +28,13 @@ var Hook = (function () {
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
-        ctx.rect(this.x - this.width / 2, this.y - this.heigth, this.width, this.heigth);
+        ctx.rect(this.x - this.width / 2, this.y - this.height, this.width, this.height);
         ctx.fillStyle = "#ff0000";
         ctx.fill();
         ctx.closePath();
+
+        this.drawFishes();
+
     };
 
     Hook.prototype.addFish = function (fish) {
@@ -54,7 +57,7 @@ var Hook = (function () {
     };
 
     Hook.prototype.update = function (deltaTime, boatPositionX,cameraY) {
-        var isHookInSea = (this.localY - this.heigth / 2) > GameModel.getInstance().seaPositionY;
+        var isHookInSea = (this.localY - this.height / 2) > GameModel.getInstance().seaPositionY;
 
         if (isHookInSea) {
             this.localX += (boatPositionX - this.localX) * (this.hookSpeedX * deltaTime);
@@ -79,8 +82,6 @@ var Hook = (function () {
         this.y = this.localY - cameraY;
 
         GameModel.getInstance().deep = (this.y+cameraY- GameModel.getInstance().seaPositionY).toFixed();
-        this.draw();
-        this.drawFishes();
     };
     return Hook;
 }());

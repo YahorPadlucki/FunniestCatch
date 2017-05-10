@@ -27,6 +27,13 @@ var Utils = (function () {
         return color;
     };
 
+    Utils.removeFromArray = function(arr, element) {
+        var index = arr.indexOf(element);
+        if (index != -1) {
+            arr.splice(index, 1);
+        }
+    };
+
 
     Utils.collidePointWithRotatedRectangle = function (point, rect) {
 

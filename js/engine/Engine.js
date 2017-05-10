@@ -12,6 +12,7 @@ var Engine = (function (global) {
         GameModel.getInstance().doc = document;
 
         this.elementsToUpdate = [];
+        this.elementsToDraw = [];
 
         this.camera = new Camera();
         document.body.appendChild(canvas);
@@ -23,17 +24,17 @@ var Engine = (function (global) {
         this.enterFrame();
     };
 
-    Engine.prototype.removeFromUpdate = function (element){
-        removeFromArray(this.elementsToUpdate,element);
+    Engine.prototype.removeFromUpdate = function (element) {
+        Utils.removeFromArray(this.elementsToUpdate, element);
 
     };
 
-    function removeFromArray(arr, element) {
-        var index = arr.indexOf(element);
-        if (index != -1) {
-            arr.splice(index, 1);
-        }
+    Engine.prototype.removeFromDraw = function (element) {
+        Utils.removeFromArray(this.elementsToDraw, element);
+
     };
+
+
 
     Engine.prototype.enterFrame = function () {
 
@@ -42,6 +43,7 @@ var Engine = (function (global) {
         var now = Date.now();
         var deltaTime = (now - this.prevTime) / 1000.0;
 
+        this.draw(deltaTime);
         this.update(deltaTime);
 
         this.prevTime = now;
@@ -49,23 +51,28 @@ var Engine = (function (global) {
         window.requestAnimationFrame(this.enterFrame.bind(this));
     };
 
-    //TODO: object to draw (fishes ,boat etc);
-    //TODO: object to update (collision, camera)
     Engine.prototype.update = function (deltaTime) {
         for (var i = 0; i < this.elementsToUpdate.length; i++) {
+            this.elementsToUpdate[i].update(deltaTime, this.camera.localY);
+        }
+
+        this.camera.update(deltaTime);
+
+    };
+
+    Engine.prototype.draw = function (deltaTime) {
+        for (var i = 0; i < this.elementsToDraw.length; i++) {
             //
-            var element = this.elementsToUpdate[i];
-            if(element.y>=this.camera.y){ //y vs localY
-                element.update(deltaTime,this.camera.localY);
+            var element = this.elementsToDraw[i];
+            if (element.y+element.height >= this.camera.y) { //y vs localY
+                element.draw(deltaTime, this.camera.localY);
             }
 
         }
 
-        this.camera.update(deltaTime);
         GameModel.getInstance().ctx.beginPath();
         GameModel.getInstance().ctx.fillRect(0,this.camera.y,5,5);
-
-    };
+    }
 
     return Engine;
 

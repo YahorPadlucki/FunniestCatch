@@ -62,8 +62,6 @@ var Fish = (function () {
         this.angle = this.moveBehaviour.angle;
         this.moveDirection = this.moveBehaviour.moveDirection;
 
-        this.draw();
-
     };
     return Fish;
 })();

@@ -14,6 +14,7 @@ var FishesManager = (function () {
             if (Utils.collidePointWithRotatedRectangle(hook, fish)) {
                 hook.addFish(fish);
                 this.engine.removeFromUpdate(fish);
+                this.engine.removeFromDraw(fish);
                 this.fishes.splice(i, 1);
             }
         }
@@ -29,6 +30,7 @@ var FishesManager = (function () {
 
             var fish = new Fish(rndX, GameModel.getInstance().seaPositionY + randomVerticalGap);
             this.engine.elementsToUpdate.push(fish);
+            this.engine.elementsToDraw.push(fish);
             this.fishes.push(fish);
         }
 

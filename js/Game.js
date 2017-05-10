@@ -13,23 +13,27 @@ var Game = (function () {
 
         var sea = new Sea(seaPositionY);
         engine.elementsToUpdate.push(sea);
+        engine.elementsToDraw.push(sea);
 
+        this.deepMeter = new DeepMeter();
+        engine.elementsToUpdate.push(this.deepMeter);
+
+        this.scoreBoard = new ScoreBoard();
+        engine.elementsToUpdate.push(this.scoreBoard);
 
         this.fishesManager = new FishesManager();
         this.fishesManager.createFishes();
 
         this.boat = new Boat(boatPositionX, seaPositionY);
         engine.elementsToUpdate.push(this.boat);
+        engine.elementsToDraw.push(this.boat);
+
+
 
         engine.camera.setObjectToFollow(this.boat.hook);
 
         engine.elementsToUpdate.push(this);
 
-        this.deepMeter = new DeepMeter();
-        engine.elementsToUpdate.push(this.deepMeter);
-        
-        this.scoreBoard = new ScoreBoard();
-        engine.elementsToUpdate.push(this.scoreBoard);
 
 
     }

@@ -32,7 +32,6 @@ var Boat = (function () {
         ctx.fillStyle = "#000000";
         ctx.fill();
         ctx.closePath();
-
     };
 
 

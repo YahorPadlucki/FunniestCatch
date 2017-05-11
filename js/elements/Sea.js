@@ -12,9 +12,13 @@ var Sea = (function () {
         this.ctx.rect(0, this.y, this.ctx.canvas.width, this.ctx.canvas.height + this.height);
         this.ctx.closePath();
 
-        this.ctx.fillStyle = "#51DCFF";
+
+        var deep = GameModel.getInstance().deep;
+       var shade =  deep/3000*-80;
+        this.ctx.fillStyle =  Utils.shadeColor("#51DCFF",shade);
         this.ctx.fill();
     };
+
 
     Sea.prototype.update = function (deltaTime, cameraY) {
         this.y = this.localY - cameraY;

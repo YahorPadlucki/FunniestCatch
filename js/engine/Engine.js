@@ -64,15 +64,15 @@ var Engine = (function (global) {
         for (var i = 0; i < this.elementsToDraw.length; i++) {
             //
             var element = this.elementsToDraw[i];
-            if (element.y+element.height >= this.camera.y) { //y vs localY
+            if (element.y+element.height >= this.camera.y&&element.y-element.height<this.camera.y+canvas.height) { //y vs localY
                 element.draw(deltaTime, this.camera.localY);
             }
 
         }
 
         GameModel.getInstance().ctx.beginPath();
-        GameModel.getInstance().ctx.fillRect(0,this.camera.y,5,5);
-    }
+        GameModel.getInstance().ctx.fillRect(0,this.camera.y+canvas.height-5,5,5);
+    };
 
     return Engine;
 

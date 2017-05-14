@@ -18,12 +18,7 @@ DefaultMove = (function () {
 
             this.speed = Utils.randomRangeInt(45, 80);
             this.moveDirection *= -1;
-            if (this.moveDirection > 0) {
-                this.angle = 180 * Math.PI / 180;
-            }
-            else {
-                this.angle = 0;
-            }
+
             this.setPositionInBounds();
         }
 
@@ -37,7 +32,16 @@ DefaultMove = (function () {
         if (this.x > this.canvasWidth) {
             this.x = this.canvasWidth;
         }
+
+        if (this.moveDirection > 0) {
+            this.angle = 180 * Math.PI / 180;
+        }
+        else {
+            this.angle = 0;
+        }
     };
+
+
 
     return DefaultMove;
 

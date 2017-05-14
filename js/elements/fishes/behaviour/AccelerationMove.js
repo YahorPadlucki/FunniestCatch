@@ -7,6 +7,7 @@ AccelerationMove = (function () {
 
         this.initAcc = 1.03;
         this.acc = this.initAcc;
+
     }
 
     AccelerationMove.prototype.move = function (deltaTime) {

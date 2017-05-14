@@ -5,6 +5,7 @@ EasingBehaviour = (function () {
 
         this.initX = x;
         this.iteration = 0;
+        this.angle = 180 * Math.PI / 180;
 
         this.goalX = this.canvasWidth - this.initX;
         this.totalIterations = 300 * this.goalX / this.canvasWidth + 1;
@@ -31,8 +32,12 @@ EasingBehaviour = (function () {
             this.x = 0;
             this.initX = 0;
             this.goalX = this.canvasWidth;
+            this.angle = 180 * Math.PI / 180;
+
         }
         if (this.x > this.canvasWidth) {
+            this.angle = 0;
+
             this.x = this.canvasWidth;
             this.initX = this.canvasWidth;
             this.goalX = -this.canvasWidth;

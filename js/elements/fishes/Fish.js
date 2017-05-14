@@ -2,7 +2,7 @@ var Fish = (function () {
 
     var colors = ["#A52A2A", "#FF7F50", "#00008B", "#006400", "#FF1493", "#C71585", "#FF4500"];
 
-    function Fish(x, y) {
+    function Fish(x, y, moveBehaviour) {
 
         this.bodyWidth = 20;
         this.bodyHeight = 20;
@@ -16,7 +16,7 @@ var Fish = (function () {
 
         this.y = y;
 
-        this.moveBehaviour = new DefaultMove(x, y);
+        this.moveBehaviour = moveBehaviour;
         
         this.angle = this.moveBehaviour.angle;
     }

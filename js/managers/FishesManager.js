@@ -25,16 +25,31 @@ var FishesManager = (function () {
         var canvasWidth = GameModel.getInstance().ctx.canvas.width;
         for (var i = 0; i < 10; i++) {
 
-            var rndX = Utils.randomRange(0, canvasWidth);
+            var fishX = Utils.randomRange(0, canvasWidth);
             var randomVerticalGap = Utils.randomRange(50, 150) * (i + 1);
+            var fishY = GameModel.getInstance().seaPositionY + randomVerticalGap;
 
-            var fish = new Fish(rndX, GameModel.getInstance().seaPositionY + randomVerticalGap);
+            var behaviour = getFishBehaviour(fishX, fishY);
+
+            var fish = new Fish(fishX, fishY, behaviour);
             this.engine.elementsToUpdate.push(fish);
             this.engine.elementsToDraw.push(fish);
             this.fishes.push(fish);
         }
 
     };
+
+    function getFishBehaviour(fishX,fishY) {
+        var behaviour =  new DefaultMove(fishX, fishY);
+        if(fishY>400)
+            behaviour = new EasingBehaviour(fishX, fishY);
+        if(fishY>800)
+            behaviour = new AccelerationMove(fishX, fishY);
+        if(fishY>1000)
+            behaviour = new SineMove(fishX, fishY);
+
+        return behaviour;
+    }
 
     return FishesManager;
 }());

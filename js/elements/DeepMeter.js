@@ -6,7 +6,9 @@ var DeepMeter = (function () {
         var ctx = GameModel.getInstance().ctx;
         ctx.beginPath();
         ctx.fillStyle = "#000000";
-        ctx.fillText(GameModel.getInstance().deep.toString(), 10, 50);
+        ctx.textBaseline = 'top';
+        ctx.font= '30px "Indie Flower"';
+        ctx.fillText("Depth: "+GameModel.getInstance().deep.toString(), 10, 0);
         ctx.closePath();
     };
 

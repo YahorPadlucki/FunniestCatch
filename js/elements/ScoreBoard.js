@@ -14,7 +14,7 @@ var ScoreBoard = (function () {
         var ctx = GameModel.getInstance().ctx;
         ctx.beginPath();
         ctx.fillStyle = "#000000";
-        ctx.fillText(score.toString(), 10, 100);
+        ctx.fillText("Score: "+score.toString(), 10, 50);
         ctx.closePath();
     };
 

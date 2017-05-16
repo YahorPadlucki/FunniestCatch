@@ -31,7 +31,27 @@ var FishesManager = (function () {
 
             var behaviour = getFishBehaviour(fishX, fishY);
 
-            var fish = new Fish(fishX, fishY, behaviour);
+
+            var widthMaxMultiplier = 1;
+            var heightMaxMultiplier = 1;
+            var tailMaxMultiplier = 1;
+            if (fishY > 500) {
+                tailMaxMultiplier = 3;
+            }
+            if (fishY > 800) {
+                widthMaxMultiplier = 3;
+            }
+            if (fishY > 1000) {
+                heightMaxMultiplier = 2;
+            }
+
+            var sizeMultipliers = {
+                widht: Utils.randomRangeInt(1, widthMaxMultiplier),
+                height: Utils.randomRangeInt(1, heightMaxMultiplier),
+                tail: Utils.randomRangeInt(1, tailMaxMultiplier)
+            };
+
+            var fish = new Fish(fishX, fishY, behaviour, sizeMultipliers);
             this.engine.elementsToUpdate.push(fish);
             this.engine.elementsToDraw.push(fish);
             this.fishes.push(fish);
@@ -39,13 +59,13 @@ var FishesManager = (function () {
 
     };
 
-    function getFishBehaviour(fishX,fishY) {
-        var behaviour =  new DefaultMove(fishX, fishY);
-        if(fishY>400)
+    function getFishBehaviour(fishX, fishY) {
+        var behaviour = new DefaultMove(fishX, fishY);
+        if (fishY > 400)
             behaviour = new EasingBehaviour(fishX, fishY);
-        if(fishY>800)
+        if (fishY > 800)
             behaviour = new AccelerationMove(fishX, fishY);
-        if(fishY>1000)
+        if (fishY > 1000)
             behaviour = new SineMove(fishX, fishY);
 
         return behaviour;

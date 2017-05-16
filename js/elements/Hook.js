@@ -6,7 +6,7 @@ var Hook = (function () {
         this.localX = x;
         this.localY = y;
 
-        this.width = 10;
+        this.width = 5;
         this.height = 15;
 
         this.hookSpeedX = 5;
@@ -31,8 +31,13 @@ var Hook = (function () {
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
-        ctx.rect(this.x - this.width / 2, this.y - this.height, this.width, this.height);
+        ctx.rect(this.x , this.y - this.height, this.width/2, this.height);
         ctx.fillStyle = "#ff0000";
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        var diameter = 5;
+        ctx.arc(this.x  ,this.y-diameter,diameter,0.5*Math.PI,0,true);
         ctx.fill();
         ctx.closePath();
 

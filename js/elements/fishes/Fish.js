@@ -2,12 +2,12 @@ var Fish = (function () {
 
     var colors = ["#A52A2A", "#FF7F50", "#00008B", "#006400", "#FF1493", "#C71585", "#FF4500"];
 
-    function Fish(x, y, moveBehaviour) {
+    function Fish(x, y, moveBehaviour,sizeMultipliers) {
 
-        this.bodyWidth = 20;
-        this.bodyHeight = 20;
+        this.bodyWidth = 20 * sizeMultipliers.widht;
+        this.bodyHeight = 20 * sizeMultipliers.height;
         this.headWidth = this.bodyHeight / 2;
-        this.tailWidth = 10;
+        this.tailWidth = 10 * sizeMultipliers.tail;
 
         this.width = this.headWidth + this.bodyWidth + this.tailWidth;
         this.height = this.bodyHeight;
@@ -17,7 +17,7 @@ var Fish = (function () {
         this.y = y;
 
         this.moveBehaviour = moveBehaviour;
-        
+
         this.angle = this.moveBehaviour.angle;
     }
 

@@ -28,6 +28,9 @@ var Game = (function () {
         engine.elementsToUpdate.push(this.boat);
         engine.elementsToDraw.push(this.boat);
 
+        this.popup = new Popup();
+        engine.elementsToDraw.push(this.popup);
+
 
 
         engine.camera.setObjectToFollow(this.boat.hook);

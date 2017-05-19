@@ -1,3 +1,4 @@
 const GameEvent = {
-    FISH_CAUGHT:"FISH_CAUGHT"
+    FISH_CAUGHT:"FISH_CAUGHT",
+    CLOSE_POPUP:"CLOSE_POPUP"
 };

@@ -28,6 +28,7 @@ var DrawUtils = (function () {
         ctx.lineTo(tailX + fish.tailWidth, -fish.bodyHeight / 2);
         ctx.lineTo(tailX, fish.bodyHeight / 2);
         ctx.fill();
+        ctx.closePath();
 
         ctx.restore();
     }

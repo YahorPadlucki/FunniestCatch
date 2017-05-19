@@ -1,5 +1,5 @@
 var Boat = (function () {
-    function Boat(x, y) {
+    function Boat(x, y, hook) {
         this.localX = x;
         this.localY = y;
         this.mousePosition = y;
@@ -10,9 +10,11 @@ var Boat = (function () {
         this.x = this.localX;
         this.y = this.localY;
 
+        this.hook = hook;
+
         GameModel.getInstance().doc.addEventListener("mousemove", this.onMouseMove.bind(this), false);
         this.canvasWidth = GameModel.getInstance().ctx.canvas.width;
-        this.hook = new Hook(this.localX, this.localY);
+
     }
 
     Boat.prototype.onMouseMove = function (e) {
@@ -28,15 +30,17 @@ var Boat = (function () {
         var ctx = GameModel.getInstance().ctx;
 
         ctx.beginPath();
-        ctx.moveTo(this.x - this.width / 2 ,this.y- this.height);
-        ctx.lineTo(this.x + this.width / 2 ,this.y- this.height);
-        ctx.lineTo(this.x + this.width / 3 ,this.y);
-        ctx.lineTo(this.x - this.width / 3 ,this.y);
-        ctx.lineTo(this.x - this.width / 2 ,this.y- this.height);
+        ctx.moveTo(this.x - this.width / 2, this.y - this.height);
+        ctx.lineTo(this.x + this.width / 2, this.y - this.height);
+        ctx.lineTo(this.x + this.width / 3, this.y);
+        ctx.lineTo(this.x - this.width / 3, this.y);
+        ctx.lineTo(this.x - this.width / 2, this.y - this.height);
         // ctx.rect(this.x - this.width / 2, this.y - this.height, this.width, this.height);
         ctx.fillStyle = "#000000";
         ctx.fill();
         ctx.closePath();
+
+
     };
 
 
@@ -50,7 +54,7 @@ var Boat = (function () {
         this.x = this.localX;
         this.y = this.localY - cameraY;
         this.hook.update(deltaTime, this.x, cameraY);
-        this.hook.draw();
+
 
     };
 

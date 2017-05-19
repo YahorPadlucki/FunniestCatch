@@ -24,12 +24,17 @@ var Game = (function () {
         this.fishesManager = new FishesManager();
         this.fishesManager.createFishes();
 
-        this.boat = new Boat(boatPositionX, seaPositionY);
+        this.hook = new Hook(boatPositionX, seaPositionY);
+        this.boat = new Boat(boatPositionX, seaPositionY,this.hook);
+
         engine.elementsToUpdate.push(this.boat);
+
         engine.elementsToDraw.push(this.boat);
+        engine.elementsToDraw.push(this.hook);
 
         this.popup = new Popup();
         engine.elementsToDraw.push(this.popup);
+        // this.popup.show("Hi there!");
 
 
 

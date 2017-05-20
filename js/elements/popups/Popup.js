@@ -21,6 +21,10 @@ var Popup = (function () {
 
     Popup.prototype.draw = function () {
         if (!this.isVisible) return;
+        this.drawPopup();
+    };
+
+    Popup.prototype.drawPopup = function () {
         this.ctx.beginPath();
 
         this.ctx.fillStyle = "#000000";

@@ -42,8 +42,6 @@ var Game = (function () {
 
         engine.elementsToUpdate.push(this);
 
-
-
     }
 
     Game.prototype.update = function () { //TODO: to update

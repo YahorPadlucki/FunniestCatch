@@ -59,6 +59,7 @@ var Hook = (function () {
         this.fishes.push(fish);
         this.isMouseDown = false;
 
+        GameModel.getInstance().score++;
         var event = new Event(GameEvent.FISH_CAUGHT);
         dispatchEvent(event);
     };

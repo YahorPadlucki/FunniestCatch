@@ -10,7 +10,7 @@ var Popup = (function () {
 
         this.title = "";
 
-        addEventListener(GameEvent.CLOSE_POPUP, ()=>this.isVisible = false);
+        addEventListener(GameEvent.CLOSE_POPUP, ()=> this.isVisible = false);
     }
 
     Popup.prototype.show = function (title) {
@@ -30,13 +30,17 @@ var Popup = (function () {
         this.ctx.fillStyle = "#000000";
         this.ctx.fillRect(this.x - this.width / 2, this.y - this.height / 2, this.width, this.height);
         this.closeBtn.draw();
+        this.fillTexts();
 
+        this.ctx.closePath();
+    };
+
+    Popup.prototype.fillTexts = function () {
         this.ctx.fillStyle = "#ffffff";
         this.ctx.textBaseline = 'top';
         this.ctx.textAlign = 'center';
         this.ctx.font = '30px "Indie Flower"';
         this.ctx.fillText(this.title, this.x, this.y - this.height / 2);
-        this.ctx.closePath();
     };
     return Popup;
 }());

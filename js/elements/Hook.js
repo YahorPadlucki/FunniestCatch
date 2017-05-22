@@ -32,6 +32,8 @@ var Hook = (function () {
     Hook.prototype.draw = function () {
 
         var ctx = GameModel.getInstance().ctx;
+        var diameter = 5;
+        var lineWidth =1;
 
         ctx.beginPath();
         ctx.rect(this.x , this.y - this.height, this.width/2, this.height);
@@ -39,14 +41,14 @@ var Hook = (function () {
         ctx.fill();
         ctx.closePath();
         ctx.beginPath();
-        var diameter = 5;
         ctx.arc(this.x  ,this.y-diameter,diameter,0.5*Math.PI,0,true);
         ctx.fill();
         ctx.closePath();
 
         ctx.beginPath();
-        ctx.moveTo(this.boatX,  this.topPositionY-this.cameraY);
-        ctx.lineTo(this.x, this.y-this.height);
+        ctx.moveTo(this.boatX,  this.topPositionY-this.cameraY- this.height);
+        ctx.lineTo(this.x+lineWidth, this.y-this.height);
+        ctx.lineWidth = lineWidth;
         ctx.stroke();
         ctx.closePath();
 

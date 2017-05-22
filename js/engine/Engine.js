@@ -6,8 +6,10 @@ var Engine = (function (global) {
     var ctx = canvas.getContext('2d');
 
     function Engine() {
-        canvas.width = 600;
-        canvas.height = 600;
+        canvas.width  = window.innerWidth;
+        canvas.height = window.innerHeight;
+        // canvas.width = 600;
+        // canvas.height = 600;
         GameModel.getInstance().ctx = ctx;
         GameModel.getInstance().doc = document;
 

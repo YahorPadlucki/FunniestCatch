@@ -1,9 +1,11 @@
 var Game = (function () {
 
     function Game() {
+        GameModel.getInstance().device = new Device();
 
         var engine = new Engine();
         engine.init();
+
 
         GameModel.getInstance().engine = engine;
         var context = GameModel.getInstance().ctx;

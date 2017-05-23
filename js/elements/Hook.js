@@ -18,12 +18,14 @@ var Hook = (function () {
 
         this.fishes = [];
 
-        GameModel.getInstance().doc.addEventListener("mousedown", ()=> {
+        this.device =  GameModel.getInstance().device;
+
+        GameModel.getInstance().doc.addEventListener(this.device.event.down, ()=> {
             if (this.isMouseDown !== false) {
                 this.isMouseDown = true
             }
         }, false);
-        GameModel.getInstance().doc.addEventListener("mouseup", ()=> {
+        GameModel.getInstance().doc.addEventListener(this.device.event.up, ()=> {
             this.isMouseDown = false
         }, false);
 

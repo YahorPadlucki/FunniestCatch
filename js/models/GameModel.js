@@ -8,7 +8,8 @@ var GameModel = (function () {
             seaPositionY:150,
             engine:"",
             deep:"",
-            score:0
+            score:0,
+            device:""
         };
 
     };

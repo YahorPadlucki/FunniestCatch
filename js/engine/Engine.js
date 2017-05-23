@@ -6,12 +6,18 @@ var Engine = (function (global) {
     var ctx = canvas.getContext('2d');
 
     function Engine() {
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
-        // canvas.width = 600;
-        // canvas.height = 600;
+
+        if (GameModel.getInstance().device.isMobile) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        } else {
+            canvas.width = 600;
+            canvas.height = 600;
+        }
+
         GameModel.getInstance().ctx = ctx;
         GameModel.getInstance().doc = document;
+
 
         this.elementsToUpdate = [];
         this.elementsToDraw = [];
@@ -35,7 +41,6 @@ var Engine = (function (global) {
         Utils.removeFromArray(this.elementsToDraw, element);
 
     };
-
 
 
     Engine.prototype.enterFrame = function () {
@@ -66,14 +71,14 @@ var Engine = (function (global) {
         for (var i = 0; i < this.elementsToDraw.length; i++) {
             //
             var element = this.elementsToDraw[i];
-            if (element.y+element.height >= this.camera.y&&element.y-element.height<this.camera.y+canvas.height) { //y vs localY
+            if (element.y + element.height >= this.camera.y && element.y - element.height < this.camera.y + canvas.height) { //y vs localY
                 element.draw(deltaTime, this.camera.localY);
             }
 
         }
 
         GameModel.getInstance().ctx.beginPath();
-        GameModel.getInstance().ctx.fillRect(0,this.camera.y+canvas.height-5,5,5);
+        GameModel.getInstance().ctx.fillRect(0, this.camera.y + canvas.height - 5, 5, 5);
     };
 
     return Engine;

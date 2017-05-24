@@ -34,9 +34,7 @@ var Game = (function () {
         engine.elementsToDraw.push(this.boat);
         engine.elementsToDraw.push(this.hook);
 
-        this.popup = new TutorialPopup();
-        engine.elementsToDraw.push(this.popup);
-        this.popup.show("Hi there!");
+      new TutorialManager();
 
 
 

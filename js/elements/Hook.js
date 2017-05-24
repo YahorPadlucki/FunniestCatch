@@ -21,12 +21,11 @@ var Hook = (function () {
         this.device =  GameModel.getInstance().device;
 
         GameModel.getInstance().doc.addEventListener(this.device.event.down, ()=> {
-            if (this.isMouseDown !== false) {
-                this.isMouseDown = true
+            if (this.goDown !== false) {
+                this.goDown = true
+                var event = new Event(GameEvent.CLOSE_POPUP);
+                dispatchEvent(event);
             }
-        }, false);
-        GameModel.getInstance().doc.addEventListener(this.device.event.up, ()=> {
-            this.isMouseDown = false
         }, false);
 
     }
@@ -61,7 +60,7 @@ var Hook = (function () {
     Hook.prototype.addFish = function (fish) {
         fish.angle = 1.5708;
         this.fishes.push(fish);
-        this.isMouseDown = false;
+        this.goDown = false;
 
         GameModel.getInstance().score++;
         var event = new Event(GameEvent.FISH_CAUGHT);
@@ -89,7 +88,7 @@ var Hook = (function () {
             this.localX = boatPositionX;
         }
 
-        if (this.isMouseDown) {
+        if (this.goDown) {
             this.localY += this.hookSpeedY * deltaTime;
         } else {
             if (this.localY > this.topPositionY) {
@@ -98,7 +97,7 @@ var Hook = (function () {
             else {
                 this.localY = this.topPositionY;
                 this.fishes = [];
-                this.isMouseDown = null;
+                this.goDown = null;
             }
         }
 

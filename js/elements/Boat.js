@@ -6,7 +6,6 @@ var Boat = (function () {
         this.width = 100;
         this.height = 30;
         this.boatSpeed = 0.8;
-        this.isMouseDown = false;
         this.x = this.localX;
         this.y = this.localY;
 

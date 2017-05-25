@@ -95,9 +95,15 @@ var Hook = (function () {
                 this.localY -= this.hookSpeedY * deltaTime;
             }
             else {
+
+                if(this.goDown==false){
+                    var event = new Event(GameEvent.HOOK_ON_TOP);
+                    dispatchEvent(event);
+                }
                 this.localY = this.topPositionY;
                 this.fishes = [];
                 this.goDown = null;
+
             }
         }
 

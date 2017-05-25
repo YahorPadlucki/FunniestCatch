@@ -1,4 +1,5 @@
 const GameEvent = {
+    HOOK_ON_TOP:"HOOK_ON_TOP",
     FISH_CAUGHT:"FISH_CAUGHT",
     CLOSE_POPUP:"CLOSE_POPUP"
 };

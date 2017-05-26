@@ -13,12 +13,12 @@ var Hook = (function () {
         this.hookSpeedX = 5;
         this.hookSpeedY = 50;
 
-        this.cameraY=0;
+        this.cameraY = 0;
 
 
         this.fishes = [];
 
-        this.device =  GameModel.getInstance().device;
+        this.device = GameModel.getInstance().device;
 
         GameModel.getInstance().doc.addEventListener(this.device.event.down, ()=> {
             if (this.goDown !== false) {
@@ -34,21 +34,21 @@ var Hook = (function () {
 
         var ctx = GameModel.getInstance().ctx;
         var diameter = 5;
-        var lineWidth =1;
+        var lineWidth = 1;
 
         ctx.beginPath();
-        ctx.rect(this.x , this.y - this.height, this.width/2, this.height);
+        ctx.rect(this.x, this.y - this.height, this.width / 2, this.height);
         ctx.fillStyle = "#ff0000";
         ctx.fill();
         ctx.closePath();
         ctx.beginPath();
-        ctx.arc(this.x  ,this.y-diameter,diameter,0.5*Math.PI,0,true);
+        ctx.arc(this.x, this.y - diameter, diameter, 0.5 * Math.PI, 0, true);
         ctx.fill();
         ctx.closePath();
 
         ctx.beginPath();
-        ctx.moveTo(this.boatX,  this.topPositionY-this.cameraY- this.height);
-        ctx.lineTo(this.x+lineWidth, this.y-this.height);
+        ctx.moveTo(this.boatX, this.topPositionY - this.cameraY - this.height);
+        ctx.lineTo(this.x + lineWidth, this.y - this.height);
         ctx.lineWidth = lineWidth;
         ctx.stroke();
         ctx.closePath();
@@ -59,7 +59,14 @@ var Hook = (function () {
 
     Hook.prototype.addFish = function (fish) {
         fish.angle = 1.5708;
-        this.fishes.push(fish);
+        if (this.fishes.length) {
+            var lastFish = this.fishes[this.fishes.length - 1];
+            if (lastFish.width < fish)
+                this.fishes.push(fish);
+
+        } else {
+            this.fishes.push(fish);
+        }
         this.goDown = false;
 
         GameModel.getInstance().score++;
@@ -96,7 +103,7 @@ var Hook = (function () {
             }
             else {
 
-                if(this.goDown==false){
+                if (this.goDown == false) {
                     var event = new Event(GameEvent.HOOK_ON_TOP);
                     dispatchEvent(event);
                 }

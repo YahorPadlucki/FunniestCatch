@@ -10,25 +10,32 @@ var Hook = (function () {
         this.width = 5;
         this.height = 15;
 
-        this.hookSpeedX = 5;
-        this.hookSpeedY = 50;
+        this.hookSpeedX = 25;
+        this.hookSpeedY = 100;
 
         this.cameraY = 0;
+
+        this.maxDepth = GameModel.getInstance().maxDepth;
 
 
         this.fishes = [];
 
         this.device = GameModel.getInstance().device;
 
-        GameModel.getInstance().doc.addEventListener(this.device.event.down, ()=> {
-            if (this.goDown !== false) {
-                this.goDown = true
-                var event = new Event(GameEvent.CLOSE_POPUP);
-                dispatchEvent(event);
-            }
-        }, false);
+        GameModel.getInstance().doc.addEventListener(this.device.event.down, this.onMouseDown.bind(this));
 
     }
+
+    //TODO: make general input manager? or dispatch vent to the game to set alla this data
+    Hook.prototype.onMouseDown = function () {
+        if (this.goDown !== false) {
+            this.goDown = true
+            var event = new Event(GameEvent.CLOSE_POPUP);
+            dispatchEvent(event);
+
+            GameModel.getInstance().score = 0;
+        }
+    };
 
     Hook.prototype.draw = function () {
 
@@ -119,7 +126,13 @@ var Hook = (function () {
 
         this.cameraY = cameraY;
 
-        GameModel.getInstance().deep = (this.y + cameraY - GameModel.getInstance().seaPositionY).toFixed();
+        var depth = this.y + cameraY - GameModel.getInstance().seaPositionY;
+
+        if (depth >= this.maxDepth) {
+            this.goDown = false;
+        }
+
+        GameModel.getInstance().deep = (depth).toFixed();
     };
     return Hook;
 }());

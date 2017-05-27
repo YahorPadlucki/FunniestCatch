@@ -36,13 +36,20 @@ var Game = (function () {
 
          new TutorialManager();
 
-
-
         engine.camera.setObjectToFollow(this.boat.hook);
 
         engine.elementsToUpdate.push(this);
 
+        addEventListener(GameEvent.HOOK_ON_TOP, this.showFinalScore.bind(this));
+
+
+        this.finalPopup = new FinalPopup();
+        engine.elementsToDraw.push(this.finalPopup);
     }
+    
+    Game.prototype.showFinalScore = function () {
+        this.finalPopup.show();
+    };
 
     Game.prototype.update = function () { //TODO: to update
         this.fishesManager.checkCollisionWithHook(this.boat.hook)

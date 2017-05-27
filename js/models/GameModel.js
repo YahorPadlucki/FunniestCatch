@@ -9,7 +9,8 @@ var GameModel = (function () {
             engine:"",
             deep:"",
             score:0,
-            device:""
+            device:"",
+            maxDepth:2000
         };
 
     };

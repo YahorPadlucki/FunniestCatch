@@ -23,7 +23,7 @@ var FishesManager = (function () {
     FishesManager.prototype.createFishes = function () {
 
         var canvasWidth = GameModel.getInstance().ctx.canvas.width;
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 20; i++) {
 
             var fishX = Utils.randomRange(0, canvasWidth);
             var randomVerticalGap = Utils.randomRange(50, 150) * (i + 1);
@@ -55,6 +55,8 @@ var FishesManager = (function () {
             this.engine.elementsToUpdate.push(fish);
             this.engine.elementsToDraw.push(fish);
             this.fishes.push(fish);
+
+            GameModel.getInstance().maxDepth = fishY+500;
         }
 
     };

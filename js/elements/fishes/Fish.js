@@ -24,7 +24,7 @@ var Fish = (function () {
     Fish.prototype.draw = function () {
 
         DrawUtils.drawFish(this);
-        this.drawVertices();
+        // this.drawVertices();
 
     };
 

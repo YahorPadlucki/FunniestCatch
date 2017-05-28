@@ -18,6 +18,8 @@ var TutorialPopup = (function () {
 
 
     Popup.prototype.fillTexts = function () {
+        this.ctx.beginPath();
+
         this.ctx.fillStyle = "#ffffff";
         this.ctx.textBaseline = 'middle';
         this.ctx.textAlign = 'center';
@@ -28,6 +30,7 @@ var TutorialPopup = (function () {
         }
         this.ctx.fillText(this.text1, this.x, this.y - linesGap);
         this.ctx.fillText(this.text2, this.x, this.y + linesGap);
+        this.ctx.closePath();
     };
 
     return TutorialPopup;

@@ -34,14 +34,13 @@ var Game = (function () {
         engine.elementsToDraw.push(this.boat);
         engine.elementsToDraw.push(this.hook);
 
-         new TutorialManager();
+        new TutorialManager();
 
         engine.camera.setObjectToFollow(this.boat.hook);
 
         engine.elementsToUpdate.push(this);
 
         addEventListener(GameEvent.HOOK_ON_TOP, this.showFinalScore.bind(this));
-
 
         this.finalPopup = new FinalPopup();
         engine.elementsToDraw.push(this.finalPopup);
@@ -51,7 +50,7 @@ var Game = (function () {
         this.finalPopup.show();
     };
 
-    Game.prototype.update = function () { //TODO: to update
+    Game.prototype.update = function () {
         this.fishesManager.checkCollisionWithHook(this.boat.hook)
 
     };

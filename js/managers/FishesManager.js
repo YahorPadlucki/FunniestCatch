@@ -23,7 +23,7 @@ var FishesManager = (function () {
     FishesManager.prototype.createFishes = function () {
 
         var canvasWidth = GameModel.getInstance().ctx.canvas.width;
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < GameModel.getInstance().maxFishes; i++) {
 
             var fishX = Utils.randomRange(0, canvasWidth);
             var randomVerticalGap = Utils.randomRange(50, 150) * (i + 1);

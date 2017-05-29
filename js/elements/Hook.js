@@ -26,7 +26,6 @@ var Hook = (function () {
 
     }
 
-    //TODO: make general input manager? or dispatch vent to the game to set alla this data
     Hook.prototype.onMouseDown = function () {
         if (this.goDown !== false) {
             this.goDown = true
@@ -68,7 +67,7 @@ var Hook = (function () {
         fish.angle = 1.5708;
         if (this.fishes.length) {
             var lastFish = this.fishes[this.fishes.length - 1];
-            if (lastFish.width < fish)
+            if (lastFish.bodyWidth < fish.bodyWidth)
                 this.fishes.push(fish);
 
         } else {

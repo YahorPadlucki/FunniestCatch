@@ -10,10 +10,12 @@ var GameModel = (function () {
             deep:"",
             score:0,
             device:"",
-            maxDepth:2000
+            maxDepth:2000,
+            maxFishes:20
+
         };
 
-    };
+    }
 
     return {
         getInstance: function () {

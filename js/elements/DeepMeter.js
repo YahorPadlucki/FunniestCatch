@@ -36,8 +36,8 @@ var DeepMeter = (function () {
     DeepMeter.prototype.drawArrowDown = function () {
 
         this.ctx.beginPath();
+        this.ctx.fillStyle = "#ff0000";
         this.ctx.fillRect(arrowX, arrowY, arrowWidth, arrowBodyHeight);
-        this.ctx.fillStyle = "#ff000";
         this.ctx.moveTo(0, arrowBodyHeight + arrowY);
         this.ctx.lineTo(arrowWidth * 3, arrowBodyHeight + arrowY);
         this.ctx.lineTo(arrowWidth * 3 / 2, arrowBodyHeight + arrowHeight + arrowY);
@@ -50,16 +50,14 @@ var DeepMeter = (function () {
     DeepMeter.prototype.drawArrowUp = function () {
 
         this.ctx.beginPath();
+        this.ctx.fillStyle = "#ff0000";
         this.ctx.fillRect(arrowX, arrowY + arrowHeight, arrowWidth, arrowBodyHeight);
-        this.ctx.fillStyle = "#ff000";
         this.ctx.moveTo(0, arrowY + arrowHeight);
         this.ctx.lineTo(arrowWidth * 3, arrowY + arrowHeight);
         this.ctx.lineTo(arrowWidth * 3 / 2, arrowHeight);
         this.ctx.lineTo(0, arrowY + arrowHeight);
         this.ctx.fill();
         this.ctx.closePath();
-
-
     };
 
     return DeepMeter;

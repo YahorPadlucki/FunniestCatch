@@ -1,5 +1,5 @@
 var Popup = (function () {
-    function Popup(hasCloseButton = false) {
+    function Popup(hasCloseButton) {
         this.ctx = GameModel.getInstance().ctx;
         this.width = 500;
         this.height = 500;
@@ -12,8 +12,12 @@ var Popup = (function () {
 
         this.text = "";
 
-        addEventListener(GameEvent.CLOSE_POPUP, ()=> this.isVisible = false);
+        addEventListener(GameEvent.CLOSE_POPUP, this.onClose.bind(this));
     }
+
+    Popup.prototype.onClose = function () {
+        this.isVisible = false
+    };
 
     Popup.prototype.show = function (text) {
         this.isVisible = true;

@@ -46,7 +46,7 @@ var TutorialManager = (function () {
                 removeEventListener(GameEvent.FISH_CAUGHT, this.nextStep.bind(this));
                 break;
         }
-        setTimeout(()=>this.popup.show(text1, text2), delay);
+        setTimeout(this.popup.show(text1, text2).bind(this), delay);
 
     };
 

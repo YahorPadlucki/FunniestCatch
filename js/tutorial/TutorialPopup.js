@@ -10,10 +10,10 @@ var TutorialPopup = (function () {
 
     TutorialPopup.prototype = Object.create(Popup.prototype);
 
-    Popup.prototype.show = function (text1, text2="") {
+    Popup.prototype.show = function (text1, text2) {
         this.isVisible = true;
         this.text1 = text1;
-        this.text2 = text2;
+        this.text2 = text2 ? text2 : "";
     };
 
 

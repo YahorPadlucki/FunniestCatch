@@ -7,7 +7,7 @@ var TutorialManager = (function () {
         this.isMobile = GameModel.getInstance().device.isMobile;
 
         var introTxt = "Click to cast the line";
-        if(this.isMobile){
+        if (this.isMobile) {
             introTxt = "Tap to cast the line";
         }
 
@@ -32,7 +32,7 @@ var TutorialManager = (function () {
         switch (tutorialStep) {
             case 2:
                 text1 = "Move mouse to avoid fish";
-                if(this.isMobile){
+                if (this.isMobile) {
                     text1 = "Touch and move to avoid fish";
                 }
                 text2 = "On the way down";
@@ -46,7 +46,7 @@ var TutorialManager = (function () {
                 removeEventListener(GameEvent.FISH_CAUGHT, this.nextStep.bind(this));
                 break;
         }
-        setTimeout(this.popup.show(text1, text2).bind(this), delay);
+        setTimeout(this.popup.show(text1, text2), delay);
 
     };
 

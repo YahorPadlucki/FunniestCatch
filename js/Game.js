@@ -27,7 +27,7 @@ var Game = (function () {
         this.fishesManager.createFishes();
 
         this.hook = new Hook(boatPositionX, seaPositionY);
-        this.boat = new Boat(boatPositionX, seaPositionY,this.hook);
+        this.boat = new Boat(boatPositionX, seaPositionY, this.hook);
 
         engine.elementsToUpdate.push(this.boat);
 
@@ -45,7 +45,7 @@ var Game = (function () {
         this.finalPopup = new FinalPopup();
         engine.elementsToDraw.push(this.finalPopup);
     }
-    
+
     Game.prototype.showFinalScore = function () {
         this.finalPopup.show();
     };

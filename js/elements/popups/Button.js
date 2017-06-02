@@ -4,7 +4,7 @@ var Button = (function () {
         this.ctx = GameModel.getInstance().ctx;
         this.width = 50;
         this.height = 50;
-        this.x = x- this.width/2;
+        this.x = x - this.width / 2;
         this.y = y - this.height;
     }
 
@@ -26,9 +26,9 @@ var Button = (function () {
 
         this.ctx.fillStyle = "#ffffff";
         this.ctx.textBaseline = 'middle';
-        this.ctx.textAlign  = 'center';
+        this.ctx.textAlign = 'center';
         this.ctx.font = '30px "Indie Flower"';
-        this.ctx.fillText("OK", this.x+this.width/2, this.y+this.width/2);
+        this.ctx.fillText("OK", this.x + this.width / 2, this.y + this.width / 2);
         this.ctx.closePath();
 
     };

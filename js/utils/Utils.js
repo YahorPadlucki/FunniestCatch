@@ -67,9 +67,6 @@ var Utils = (function () {
 
         var rotatedPoint = Utils.rotatePoint(rect, point, rect.angle);
 
-        /*    ctx.fillStyle="#ff23ff";
-         ctx.fillRect(rotatedPoint.x,rotatedPoint.y,5,5);*/
-
         var closestX, closestY;
 
         if (rotatedPoint.x < rectX) {
@@ -88,8 +85,6 @@ var Utils = (function () {
         } else {
             closestY = rotatedPoint.y;
         }
-        /* ctx.fillStyle="#ff13f";
-         ctx.fillRect(closestX,closestY,5,5)*/
 
         var distance = getDistance(rotatedPoint.x, rotatedPoint.y, closestX, closestY);
 

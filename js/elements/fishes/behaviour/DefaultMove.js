@@ -42,7 +42,6 @@ DefaultMove = (function () {
     };
 
 
-
     return DefaultMove;
 
 }());

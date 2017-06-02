@@ -22,9 +22,9 @@ AccelerationMove = (function () {
         this.acc += 0.01;
         this.x += this.speed * deltaTime * this.moveDirection * this.acc;
 
-       
+
     };
 
-    return AccelerationMove
+    return AccelerationMove;
 
 }());

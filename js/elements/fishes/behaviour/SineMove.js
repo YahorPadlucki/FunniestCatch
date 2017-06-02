@@ -5,7 +5,7 @@ SineMove = (function () {
     function SineMove(x, y) {
 
         DefaultMove.apply(this, arguments);
-        
+
         this.initPositionY = y;
 
         this.prevX = this.x = x;

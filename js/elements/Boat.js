@@ -5,13 +5,13 @@ var Boat = (function () {
         this.mousePosition = y;
         this.width = 100;
         this.height = 30;
-        this.boatSpeed = 0.8;
+        this.boatSpeed = 3;
         this.x = this.localX;
         this.y = this.localY;
 
         this.hook = hook;
 
-        this.device =  GameModel.getInstance().device;
+        this.device = GameModel.getInstance().device;
 
         GameModel.getInstance().doc.addEventListener(this.device.event.move, this.onMouseMove.bind(this), false);
         this.canvasWidth = GameModel.getInstance().ctx.canvas.width;
@@ -22,7 +22,7 @@ var Boat = (function () {
         var canvas = GameModel.getInstance().ctx.canvas;
         var mouseX = e.clientX - canvas.offsetLeft;
 
-        if(this.device.isMobile){
+        if (this.device.isMobile) {
             var touch = e.touches[0] || e.changedTouches[0];
             mouseX = touch.pageX - canvas.offsetLeft;
         }
@@ -34,8 +34,7 @@ var Boat = (function () {
 
     Boat.prototype.onTouchMove = function (e) {
         var canvas = GameModel.getInstance().ctx.canvas;
-
-
+        var mouseX = e.clientX - canvas.offsetLeft;
 
         if (mouseX > 0 && mouseX < canvas.width) {
             this.mousePosition = mouseX;

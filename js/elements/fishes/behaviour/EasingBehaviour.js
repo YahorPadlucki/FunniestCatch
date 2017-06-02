@@ -17,7 +17,7 @@ EasingBehaviour = (function () {
 
         this.x = Utils.easeInQuad(this.iteration, this.initX, this.goalX, this.totalIterations);
 
-        this.iteration+=deltaTime*100;
+        this.iteration += deltaTime * 100;
         if (this.x < 0 || this.x > this.canvasWidth) {
             this.setPositionInBounds();
         }
@@ -44,7 +44,6 @@ EasingBehaviour = (function () {
 
         }
     };
-
 
 
     return EasingBehaviour;

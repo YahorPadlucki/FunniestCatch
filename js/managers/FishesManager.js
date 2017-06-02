@@ -56,7 +56,7 @@ var FishesManager = (function () {
             this.engine.elementsToDraw.push(fish);
             this.fishes.push(fish);
 
-            GameModel.getInstance().maxDepth = fishY+500;
+            GameModel.getInstance().maxDepth = fishY + 500;
         }
 
     };

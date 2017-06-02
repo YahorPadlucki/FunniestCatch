@@ -14,7 +14,7 @@ var Sea = (function () {
 
 
         var deep = GameModel.getInstance().deep;
-       var shade =  deep/3000*-80;
+        var shade =  deep/3000*-80;
         this.ctx.fillStyle =  Utils.shadeColor("#51DCFF",shade);
         this.ctx.fill();
     };

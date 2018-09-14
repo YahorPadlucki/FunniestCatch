@@ -6,7 +6,7 @@ Pure JS and Canvas - no images, no libraries
 https://yahorpadlucki.github.io/funniestCatch/
 
 <p align="center">
-  <img src="example.png" alt="Size Limit example"
+  <img src="example.png" alt=""
        width="300" height="300">
 </p>
 
